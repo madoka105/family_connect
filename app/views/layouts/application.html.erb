@@ -5,13 +5,39 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="https://kit.fontawesome.com/91172857dc.js" crossorigin="anonymous"></script>
+    <!--fontawesomeがkitcodeで導入-->
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-    <%= render 'layouts/header' %>
-    <%= yield %>
+    <header class="shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          <a class="navbar-brand p-1" href="/"><%= image_tag 'logo.png', :size => '100x100' %></a>
+
+          <ul class="navbar-nav ml-auto">
+            <% if user_signed_in? %>
+            <li class="nav-item ml-auto">
+              ようこそ、<%= current_user.name %>さん！
+            </li>
+            <% else %>
+            <% end %>
+          </ul>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        <%= render 'layouts/header' %>
+      </header>
+    <main class="mb-auto">
+      <%= yield %>
+    </main>
+    <footer class="fixed-bottom mx-0 bg-black bg-opacity-75 text-center text-dark">
+        <%= render 'layouts/footer' %>
+    </footer>
   </body>
 </html>

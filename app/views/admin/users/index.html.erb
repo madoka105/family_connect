@@ -1,2 +1,33 @@
-<h1>Admin::Users#index</h1>
-<p>Find me in app/views/admin/users/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2 class="text-center mt-5 md-5">会員一覧</h2>
+      <div class="d-flex align-items-center">
+        <table class="table text-center">
+          <thead>
+            <tr>
+              <th>会員ID</th>
+              <th>氏名</th>
+              <th>メールアドレス</th>
+              <th>ステータス</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @users.each do |user| %>
+            <tr>
+              <td>
+                <%= user.id %>
+              </td>
+              <td>
+                <%= user.email %>
+              </td>
+              <td class= "<%= user.is_withdrawal ? 'text-gray' : 'text-green' %>"><%= user.is_withdrawal ? '退会済み' : '有効' %>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

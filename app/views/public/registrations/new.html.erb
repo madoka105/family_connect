@@ -1,42 +1,47 @@
-<div class="row login-row">
-  <h2>新規登録</h2>
-
+<!--新規登録画面-->
+<div class="container my-5">
+  <div class="row px-4">
+    <h4 class="col-12 mb-5">新規会員登録</h4>
+  </div>
+  <div class="col-12 registrations">
   <%= form_with model: @user, url: user_registration_path do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
+    <%= render "public/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :名前 %><br/>
-    <%= f.text_field :name, autofocus: true %>
-  </div>
+    <div class="field row mt-2">
+      <label class="col-3">名前</label>
+      <%= f.text_field :name, autofocus: true, placeholder: '鈴木 一郎' %>
+    </div>
 
-  <div class="field">
-    <%= f.label :メールアドレス %><br/>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+    <div class="field row mt-2">
+      <label class="col-3">メールアドレス</label>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'sample@sample.com' %>
+    </div>
 
-  <div class="field">
-    <%= f.label :電話番号（ハイフンなし） %><br/>
-    <%= f.text_field :phone_number, autofocus: true, autocos: true, autofocus: true %>
-  </div>
+    <div class="field row mt-2">
+      <label class="col-3">電話番号（ハイフンなし）</label>
+      <%= f.text_field :phone_number, autofocus: true, autofocus: true, autofocus: true, placeholder: '00000000000' %>
+    </div>
 
-  <div class="field">
-    <%= f.label :パスワード（６文字以上） %>
-    <% if @minimum_password_length %>
-    <% end %><br/>
-    <%= f.password_field :password, autocomplete: "new-password", class: "password" %>
-  </div>
+    <div class="field row mt-2">
+      <label class="col-3">パスワード（６文字以上）</label>
+      <% if @minimum_password_length %>
+      <% end %><br/>
+      <%= f.password_field :password, autocomplete: "new-password", class: "password", placeholder: '123456' %>
+    </div>
 
-  <div class="field">
-    <%= f.label :パスワード（確認用） %><br/>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "password_confirm" %>
-  </div>
-
-
-  <div class="actions">
-    <%= f.submit "新規登録", class: "btn btn-success" %>
-  </div>
+    <div class="field  row mt-2">
+      <label class="col-3">パスワード（確認用）</label>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "password_confirm",placeholder: '123456' %>
+    </div>
 
 
+    <div class="actions row mt-2">
+      <div class="row mt-2">
+        <div class="col-3">
+          <%= f.submit "新規登録", class: "btn btn-success  px-4 mt-3 mb-5" %>
+        </div>
+      </div>
+    </div>
   <% end %>
 
   <h2>既に登録済みの方</h2>
@@ -45,7 +50,4 @@
   <span>からログインしてください。</span>
   <p id="notice"><%= notice %></p>
 
-  <%= render "public/shared/links" %>
-
 </div>
-

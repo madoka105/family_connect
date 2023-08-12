@@ -1,6 +1,45 @@
-<%= link_to 'ゲストログイン(閲覧用)', end_users_guest_sign_in_path, method: :post %>
-<% if user_signed_in? %>
-<%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-<% else %>
-<%= link_to 'ログイン', new_user_session_path %>
-<% end %>
+<div class="collapse navbar-collapse flex-column" id="navbarNavDropdown">
+  <ul class="navbar-nav ml-auto">
+    <% if user_signed_in? %>
+      <li class="nav-item m-1">
+        <%= link_to "マイページ", users_mypage_path, class: "btn btn-outline-secondary btn-sm nav-btn" %>
+      </li>
+      <li class="nav-item m-1">
+        <%= link_to "投稿一覧", posts_path, class: "btn btn-outline-secondary btn-sm nav-btn" %>
+      </li>
+      <li class="nav-item m-1">
+        <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-outline-secondary btn-sm nav-btn" %>
+      </li>
+    <% elsif admin_signed_in? %>
+      <li class="nav-item m-1">
+        <%= link_to "投稿一覧", posts_path, class: "btn btn-outline-secondary btn-sm nav-btn" %>
+      </li>
+      <li class="nav-item m-1">
+        <%= link_to "会員一覧", admin_users_path, class: "btn btn-outline-secondary btn-sm nav-btn" %>
+      </li>
+      <li class="nav-item m-1">
+        <%= link_to "投稿履歴一覧", admin_posts_path, class: "btn btn-outline-secondary btn-sm nav-btn" %>
+      </li>
+      <li class="nav-item m-1">
+        <%= link_to "ログアウト", destroy_admin_session_path, class: "btn btn-outline-secondary btn-sm nav-btn" %>
+      </li>
+    <% else %>
+      <li class="nav-item m-1">
+        <%= link_to "About", about_path, class: "btn btn-outline-secondary btn-sm nav-btn" %>
+      </li>
+      <li class="nav-item m-1">
+        <%= link_to "投稿一覧", posts_path, class: "btn btn-outline-secondary btn-sm nav-btn" %>
+      </li>
+      <li class="nav-item m-1">
+        <%= link_to "新規登録", new_user_registration_path, class: "btn btn-outline-secondary btn-sm nav-btn" %>
+      </li>
+      <li class="nav-item m-1">
+        <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-secondary btn-sm nav-btn" %>
+      </li>
+    <% end %>
+  </ul>
+  <div class="navbar-nav ml-auto">
+    <%= render 'public/shared/search' %>
+</div>
+</div>
+

@@ -27,10 +27,11 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 # 顧客用
 # URL /users/sign_in ...
 
+  devise_scope :user do
+    post "users/guest_sign_in", to: "user/sessions#guest_sign_in"
+  end
 
-devise_scope :end_user do
-  post 'end_users/guest_sign_in', to: 'public/sessions#guest_sign_in'
-end
+
 
     scope module: :public do
 
