@@ -17,9 +17,7 @@
             <td><%= post.user.name %></td>
             <td><%= post.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
             <td><%= post.text %></td>
-            <%# unless @user == current_user %>
-            <td><a class="navbar-brand p-1"><%= image_tag 'bookmark.png', :size => '70x70' %></a></td>
-            ️<%# end %>
+            <td><a class="navbar-brand p-1" href="/"><%= image_tag 'bookmark.png', :size => '70x70' %></a>️</td>
           </tr>
         <% end %>
         </tbody>

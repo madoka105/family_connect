@@ -1,0 +1,13 @@
+<table class="rooms">
+  <tbody>
+    <tr>
+      <td>
+        <% @chat_partners.each do |chat_partner| %>
+          <%= link_to "#{chat_partner.name}さんとのトークルーム","/chats/#{chat_partner.id}" %>
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<%= link_to("ログインページへ","/") %>
+<%= link_to("ログアウトする","/users/sign_out",method: :delete )%>

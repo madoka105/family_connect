@@ -1,0 +1,27 @@
+<h2 style="text-align:center">
+  <%= "#{@partner.name}さんとのチャット" %>
+</h2>
+<div id="chats">
+  <% @chats.each do |chat| %>
+    <% if chat.user_id==current_user.id %>
+      <div class="mycomment">
+        <p><%= chat.sentence %></p>
+      </div>
+    <% else %>
+      <div class="fukidasi">
+        <div class="chatting">
+          <div class="says">
+            <p><%= chat.sentence %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+<form id="seed-form">
+  <input type="text" id="sentence" placeholder="入力してね" style="width:30%">
+  <input type="submit" value="送信" id="send">
+  <input id="current_user_id" type="hidden" value= "<%= current_user.id %>">
+  <input id="partner_id" type="hidden" value= "<%= @partner.id %>">
+</form>
+<%= link_to("ログアウトする","/users/sign_out",method: :delete) %>

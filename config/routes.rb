@@ -56,10 +56,10 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     resources :comments, only: [:create, :destroy]
     # コメント（送信、削除）
 
-    resources :chats, only: [:create, :destroy]
+    resources :chats, only: [:create, :destroy, :index, :show]
     # チャット（送信、削除）
 
-    resources :chat_room, only: [:show, :create, :index]
+    resources :chat_rooms, only: [:show, :create, :index]
     # チャットルーム（画面、作成、一覧）
 
     resources :seaches, only: [:search]
