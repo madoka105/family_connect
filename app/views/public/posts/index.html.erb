@@ -16,7 +16,6 @@
             <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">投稿日</th>
             <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">日記</th>
             <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">お気に入り</th>
-            
           </tr>
         </thead>
         <tbody>
@@ -30,7 +29,7 @@
             </td>
             <td><%= post.text %></td>
             <%# unless @user == current_user %>
-            
+
             ️<%# end %>
             <% if user_signed_in? %>
             <td><%= render 'public/favorites/btn', post: post %></td>

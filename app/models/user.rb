@@ -8,35 +8,28 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :notifications, dependent: :destroy
 
-  # フォローしている関連付け
-  has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  # フォローをした、されたの関係
+  has_many :followers, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :followeds, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
 
-  # フォローされている関連付け
-  has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  # 一覧画面で使う
+  has_many :following_users, through: :followers, source: :followed
+  has_many :follower_users, through: :followeds, source: :follower
 
-  # フォローしているユーザーを取得
-  has_many :followings, through: :active_relationships, source: :followed
-
-  # フォロワーを取得
-  has_many :followers, through: :passive_relationships, source: :follower
-
-  has_one_attached :profile_image
-
-  # 指定したユーザーをフォローする
-  def follow(user)
-    active_relationships.create(followed_id: user.id)
+  #フォローしたときの処理
+  def follow(user_id)
+    followers.create(followed_id: user_id)
   end
 
-  # 指定したユーザーのフォローを解除する
-  def unfollow(user)
-    active_relationships.find_by(followed_id: user.id).destroy
+  #フォローを外すときの処理
+  def unfollow(user_id)
+    followers.find_by(followed_id: user_id).destroy
   end
 
-  # 指定したユーザーをフォローしているかどうかを判定
+  #フォローしていればtrueを返す
   def following?(user)
-    followings.include?(user)
+    following_users.include?(user)
   end
-
 
 GUEST_USER_EMAIL = "guest@example.com"
 
@@ -47,20 +40,12 @@ GUEST_USER_EMAIL = "guest@example.com"
     end
   end
 
-  # 検索方法分岐
-  def self.looks(search, word)
-    if search == "perfect_match"
-      User.where("name LIKE?", "#{word}")
-    elsif search == "forward_match"
-      User.where("name LIKE?","#{word}%")
-    elsif search == "backward_match"
-      User.where("name LIKE?","%#{word}")
-    elsif search == "partial_match"
-      User.where("name LIKE?","%#{word}%")
-    else
-      User.all
-    end
+  # 検索方法
+  def self.looks(word)
+    @users = User.where("name LIKE?","%#{word}%")
   end
+
+  has_one_attached :profile_image
 
    # プロフィール画像の取得メソッド
   def get_profile_image

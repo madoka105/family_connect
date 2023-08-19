@@ -1,43 +1,34 @@
 Rails.application.routes.draw do
 # 顧客用
 # URL /users/sign_in ...
-devise_for :users,skip: [:passwords], controllers: {
-  registrations: "public/registrations",
-  sessions: 'public/sessions',
-  passwords: 'users/passwords'
-}
-# 管理者用
-# URL /admin/sign_in ...
-devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
-  sessions: "admin/sessions"
-}
+  devise_for :users,skip: [:passwords], controllers: {
+    registrations: "public/registrations",
+    sessions: 'public/sessions',
+    passwords: 'users/passwords'
+  }
+  # 管理者用
+  # URL /admin/sign_in ...
+  devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
+    sessions: "admin/sessions"
+  }
   namespace :admin do
-
     root to: 'homes#top'
-
     resources :users, only: [:index, :show, :edit, :update]
     # 会員（一覧、詳細、編集、情報の更新）
 
     resources :posts, only: [:show, :index, :destroy]
     # 投稿（詳細、一覧、削除）
-
   end
 
-
-# 顧客用
-# URL /users/sign_in ...
-
+  # 顧客用
+  # URL /users/sign_in ...
   devise_scope :user do
     post "users/guest_sign_in", to: "user/sessions#guest_sign_in"
   end
 
-
-
-    scope module: :public do
-
+  scope module: :public do
     root to: 'homes#top'
     get "/homes/about" => "homes#about", as: "about"
-
     get 'users/mypage' => 'users#show'
     # 顧客のマイページ
 
@@ -65,13 +56,15 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     get "search" => "searches#search"
     # 検索（キーワードで投稿検索、会員検索）
 
-    resources :notifications, only: [:index]
-    # 通知機能
+    resources :notifications, only: [:index, :destroy]
+    # 通知機能、全削除
 
     resources :users, only: [:index, :show, :edit, :update] do
-
-    resource :relationships, only: [:create, :destroy]
-    # フォロー（フォローする、削除）
+      member do
+        get :follows, :followers
+      end
+      resource :relationships, only: [:create, :destroy]
+    end
 
     get 'favorites' => 'favorites#index', as: "favorites"
     # いいね機能
@@ -81,26 +74,12 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 
     get 'followers' => 'relationships#followers', as: "followers"
     # フォロワー一覧
-    
+
     # get 'user' => 'users#index'
-
-  end
-
     resources :posts, only: [:index, :new, :create, :show, :destroy] do
     # 投稿（一覧、新規作成画面、作成、詳細、削除）
-
       resource :favorites, only: [:index, :destroy, :create]
       # いいね（一覧、削除、追加）
-
+    end
   end
-
-
-  end
-
-
-  # root to: 'homes#top'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
 end

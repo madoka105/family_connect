@@ -35,8 +35,13 @@
       </li>
     <% end %>
   </ul>
+  
   <div class="navbar-nav ml-auto">
-    <%= render 'public/searches/search' %>
+    <% if admin_signed_in? %>
+      <%= render 'admin/searches/search' %>
+    <% else %>
+      <%= render 'public/searches/search' %>
+    <% end %>
   </div>
   </li>
   <% if user_signed_in? %>

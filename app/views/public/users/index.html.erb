@@ -23,7 +23,12 @@
               </td>
               <td class= "<%= user.is_withdrawal ? 'text-gray' : 'text-green' %>"><%= user.is_withdrawal ? '退会済み' : '有効' %>
               </td>
-               <td><%= render "public/relationships/btn", user: user, options: { class: "follow-link" } %></td>
+               <td><%#= render "public/relationships/btn", user: user, options: { class: "follow-link" } %></td>
+               <td><%= render partial: "public/relationships/btn", locals: { user: current_user } %></td>
+            
+                 <td>フォロー<%= user.followers.count %></td>
+                 <td>フォロワー<%= user.followeds.count %></td>
+      
             </tr>
           <% end %>
           </tbody>
