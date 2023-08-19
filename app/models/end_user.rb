@@ -1,4 +1,6 @@
 class EndUser < ApplicationRecord
+  has_many :notifications, dependent: :destroy
+  
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |end_user|
       end_user.password = SecureRandom.urlssfe_base64

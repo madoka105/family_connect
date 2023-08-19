@@ -1,11 +1,11 @@
 <% if post.favorited_by?(current_user) %>
-  <%= link_to post_favorites_path(post), method: :delete, remote: true do %>
-    <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
+  <%= link_to post_favorites_path(post), method: :delete do %>
+    <%= image_tag 'smile.png', :size => '70x70' %>
     <%= post.favorites.count %> いいね
   <% end %>
 <% else %>
-  <%= link_to post_favorites_path(post), method: :post, remote: true do %>
-    <i class="fas fa-heart" aria-hidden="true"></i>
+  <%= link_to post_favorites_path(post), method: :post do %>
+    <%= image_tag 'bookmark.png', :size => '70x70' %>
     <%= post.favorites.count %> いいね
   <% end %>
 <% end %>

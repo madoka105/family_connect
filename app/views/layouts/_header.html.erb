@@ -18,9 +18,6 @@
         <%= link_to "会員一覧", admin_users_path, class: "btn btn-outline-secondary btn-sm nav-btn" %>
       </li>
       <li class="nav-item m-1">
-        <%= link_to "投稿履歴一覧", admin_posts_path, class: "btn btn-outline-secondary btn-sm nav-btn" %>
-      </li>
-      <li class="nav-item m-1">
         <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-outline-secondary btn-sm nav-btn" %>
       </li>
     <% else %>
@@ -39,7 +36,20 @@
     <% end %>
   </ul>
   <div class="navbar-nav ml-auto">
-    <%= render 'public/shared/search' %>
-</div>
+    <%= render 'public/searches/search' %>
+  </div>
+  </li>
+  <% if user_signed_in? %>
+  <!--<li class="nav-item" >-->
+    <%= link_to notifications_path, class: "nav-link" do %>
+      <%if current_user.notifications.where(checked: false).exists? %>
+        <i class="fa-sharp fa-solid fa-bell fa-beat" style="color: #2ee7d;"></li>
+      <% else %>
+        <i class="fa-sharp fa-solid fa-bell"></i>
+      <%end %>
+      通知一覧
+    <% end %>
+  <!--</li>-->
+  <% end %>
 </div>
 

@@ -22,7 +22,7 @@
         </tr>
         <tr>
           <th>会員ステータス</th>
-          <% if @users.withdrawal %>
+          <% if @users.is_withdrawal %>
           <th class="text-success font-weight-bold"><%= "退会" %></th>
           <% else %>
           <th class="text-muted font-weight-block"><%= "有効" %></th>

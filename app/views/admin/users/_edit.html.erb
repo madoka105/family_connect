@@ -1,0 +1,63 @@
+<% if current_page?("/admin/users/#{user.id}/edit") == true %>
+  <%= form_with model: @user, url: admin_user_path, method: :patch do |f| %>
+  <table class="table">
+    <tbody>
+      <tr>
+        <td>会員ID</td>
+        <td><%= user.id %></td>
+      </tr>
+      <tr>
+        <td>氏名</td>
+        <td><%= f.text_field :name, class: "form-control", style: "width: 200px;" %></td>
+      </tr>
+      <tr>
+        <td>電話番号</td>
+        <td><%= f.text_field :phone_number, class: "form-control", style: "width: 200px;" %></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>
+          <td>メールアドレス</td>
+          <td><%= f.text_field :email, class: "form-control", style: "width: 300px;" %></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>会員ステータス</td>
+        <td><%= f.radio_button :is_withdrawal, "false" %> <%= f.label :is_withdrawal_false, "有効" %>
+            <%= f.radio_button :is_withdrawal, "true" %> <%= f.label :is_withdrawal_true, "退会" %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><%= f.submit "編集内容を保存", class: "btn btn-success" %></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <% end %>
+<% else %>
+  <%= form_with model: @user, url: users_information_edit_path, method: :patch do |f| %>
+  <table class="table">
+    <tbody>
+      <tr>
+        <td>氏名</td>
+        <td><%= f.text_field :name, class: "form-control", style: "width: 200px" %></td>
+      </tr>
+      <tr>
+        <td>電話番号</td>
+        <td><%= f.text_field :phone_number, class: "form-control", style: "width: 200px" %></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>メールアドレス</td>
+        <td><%= f.email_field :email, class: "form-control", style: "width: 300px" %></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><%= f.submit "編集内容を保存", class: "btn btn-success" %></td>
+        <td><%= link_to "退会する", users_withdrawal_path, class: "btn btn-danger" %></td>
+      </tr>
+    </tbody>
+  </table>
+  <% end %>
+<% end %>

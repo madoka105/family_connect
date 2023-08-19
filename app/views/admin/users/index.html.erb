@@ -1,33 +1,34 @@
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <h2 class="text-center mt-5 md-5">会員一覧</h2>
+<div class="container w-75">
+  <div class="margin-y">
+    <h2 class="text-center mt-5 md-5">会員一覧</h2>
       <div class="d-flex align-items-center">
-        <table class="table text-center">
+        <table class="table table-hover margin-y">
           <thead>
             <tr>
-              <th>会員ID</th>
-              <th>氏名</th>
-              <th>メールアドレス</th>
-              <th>ステータス</th>
+              <th class="bg-brown">会員ID</th>
+              <th class="bg-brown">氏名</th>
+              <th class="bg-brown">メールアドレス</th>
+              <th class="bg-brown">ステータス</th>
             </tr>
           </thead>
           <tbody>
             <% @users.each do |user| %>
             <tr>
-              <td>
-                <%= user.id %>
-              </td>
-              <td>
-                <%= user.email %>
-              </td>
-              <td class= "<%= user.is_withdrawal ? 'text-gray' : 'text-green' %>"><%= user.is_withdrawal ? '退会済み' : '有効' %>
-              </td>
-            </tr>
-          <% end %>
+              <td><%= user.id %></td>
+              <td><%= link_to (user.name), admin_user_path(user.id) %></td>
+              <td><%= user.email %></td>
+              <td><% if user.is_withdrawal %>
+                    <span class="text-muted">退会済み</span>
+                  <% else %>
+                    <span class="text-success"><strong>有効</strong></span>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
           </tbody>
         </table>
       </div>
+      <%= paginate @users %>
     </div>
   </div>
 </div>

@@ -1,27 +1,34 @@
+<!--投稿詳細画面-->
 <div class="container">
   <div class="row my-3">
     <h2>投稿詳細</h2>
     <div class="col-xs-10 col-xs-offset-1" style="margin-top: 50px;">
       <table class="table table-bordered">
         <thead>
-          <tr class="table-head" style="background-color:#F5F5F5;">
+          <tr class="table-head text-center" style="background-color:#F5F5F5;">
             <th scope="col">投稿者</th>
             <th scope="col">投稿日時</th>
+            <th scope="col">タイトル</th>
             <th scope="col">投稿内容</th>
             <th scope="col">写真</th>
           </tr>
         </thead>
         <tbody>
-          <%= @posts.each do |post| %>
-            <tr>
-              <td><%= @user.name %></td>
-              <td>
-                <p><%= post.created_at.strftime('%Y/%m/%d') %></p>
-                <p><%= post.text %></p>
-                <p></p>
-              </td>
-            </tr>
+          <tr>
+            <td><%= @post.user.name %></td>
+            <td><%= @post.created_at.strftime('%Y/%m/%d') %></td>
+            <td><%= @post.title %></td>
+            <td><%= @post.text %></td>
+            <td>
+              <% if @post.image.attached? %>
+                <%= image_tag @post.image, size: "350x250", class: "" %>
+              <% else %>
+                画像はありません
+              <% end %>
+            </td>
+          </tr>
         </tbody>
       </table>
+    </div>
   </div>
 </div>

@@ -1,6 +1,14 @@
 class Public::UsersController < ApplicationController
+  before_action :authenticate_user!#, only: [:index]
+
+  def index
+    @users = User.all
+  end
+
+
   def show
     @user = current_user
+    @users = User.all
   end
 
   def edit
@@ -21,6 +29,12 @@ class Public::UsersController < ApplicationController
     if @user.save
       reset_session
       redirect_to root_path
-    end 
+    end
   end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:name)
+   end
 end

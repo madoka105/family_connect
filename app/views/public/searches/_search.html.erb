@@ -1,0 +1,22 @@
+<% if admin_signed_in? %>
+  <% @serch_path = admin_posts_path %>
+<% else %>
+  <% @serch_path = posts_path %>
+<% end %>
+
+<%= form_with url: @serch_path, method: :get do |f| %>
+  <div class="row">
+    <div><%= f.text_field :word, placeholder: "投稿検索" %></div>
+    <div><%= f.submit "検索" %></div>
+  </div>
+  <% unless @serch_counts.nil? %>
+    <b class="row mt-3 text-white">⇒  "<%= @serch_word %>"で<%= @serch_counts %>件ヒット</b>
+  <% end %>
+<% end %>
+
+<!--<div class="search_form d-flex justify-content-end">-->
+<!--  <%#= form_with url:search_path, method: :get do |f| %>-->
+<!--  <%#= f.text_field :word, placeholder: "会員名", class: "align-middle" %>-->
+<!--  <%#= f.submit "検索", class: "btn btn-sm btn-primary" %>-->
+<!--  <%# end %>-->
+<!--</div>-->

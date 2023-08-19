@@ -62,23 +62,38 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     resources :chat_rooms, only: [:show, :create, :index]
     # チャットルーム（画面、作成、一覧）
 
-    resources :seaches, only: [:search]
+    get "search" => "searches#search"
     # 検索（キーワードで投稿検索、会員検索）
 
-    resources :favorites, only: [:index, :destroy, :create]
-    # いいね（一覧、削除、追加）
+    resources :notifications, only: [:index]
+    # 通知機能
 
-    resources :relationships, only: [:create, :destroy]
+    resources :users, only: [:index, :show, :edit, :update] do
+
+    resource :relationships, only: [:create, :destroy]
     # フォロー（フォローする、削除）
 
-    get 'relationships/followed' => 'relationships#followed'
+    get 'favorites' => 'favorites#index', as: "favorites"
+    # いいね機能
+
+    get 'followings' => 'relationships#followings', as: "followings"
     # フォロー一覧
 
-    get 'relationships/followers' => 'relationships"followers'
+    get 'followers' => 'relationships#followers', as: "followers"
     # フォロワー一覧
+    
+    # get 'user' => 'users#index'
 
-    resources :posts, only: [:index, :new, :create, :show, :destroy]
+  end
+
+    resources :posts, only: [:index, :new, :create, :show, :destroy] do
     # 投稿（一覧、新規作成画面、作成、詳細、削除）
+
+      resource :favorites, only: [:index, :destroy, :create]
+      # いいね（一覧、削除、追加）
+
+  end
+
 
   end
 

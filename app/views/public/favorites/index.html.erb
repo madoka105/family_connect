@@ -1,0 +1,38 @@
+<!--投稿一覧画面-->
+<div class="container mt-5 md-2">
+  <h2 class="text-center">いいね一覧</h2>
+  <div class="row">
+    <div class="table post_table table-inverse">
+      <table>
+         <thead class="table-info">
+          <tr>
+            <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">タイトル</th>
+            <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">更新日時</th>
+            <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">更新者</th>
+            <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">「いいね！」の数</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @posts.each do |post| %>
+          <tr>
+            <td><%= post.title %></td>
+            <td>
+              <%= link_to post_path(post) do %>
+                <%= post.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+              <% end %>
+            </td>
+            <td><%= post..user.name %></td>
+            
+            
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="justify-content-center mt-2">
+  <div class="col-md-4 mb-3 text-right">
+    <%= link_to '新規投稿', new_post_path, class: 'btn btn-info' %>
+  </div>
+</div>
