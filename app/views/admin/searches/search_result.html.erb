@@ -6,7 +6,7 @@
     <tbody>
       <% @users.each do |user| %>
         <tr>
-          <td><%= link_to user.name, user_path(user.id) %></td>
+          <td><%= link_to user.name, admin_user_path(user.id) %></td>
         </tr>
       <% end %>
     </tbody>

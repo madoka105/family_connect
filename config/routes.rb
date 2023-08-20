@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
 # 顧客用
 # URL /users/sign_in ...
   devise_for :users,skip: [:passwords], controllers: {
@@ -13,11 +14,15 @@ Rails.application.routes.draw do
   }
   namespace :admin do
     root to: 'homes#top'
-    resources :users, only: [:index, :show, :edit, :update]
     # 会員（一覧、詳細、編集、情報の更新）
+    resources :users, only: [:index, :show, :edit, :update]
 
-    resources :posts, only: [:show, :index, :destroy]
     # 投稿（詳細、一覧、削除）
+    resources :posts, only: [:show, :index, :destroy]
+
+    # 検索（キーワードで会員検索）
+    get "search" => "searches#search"
+
   end
 
   # 顧客用
@@ -29,35 +34,35 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'
     get "/homes/about" => "homes#about", as: "about"
-    get 'users/mypage' => 'users#show'
     # 顧客のマイページ
+    get 'users/mypage' => 'users#show'
 
-    get 'users/information/edit' => 'users#edit'
     # 顧客の会員登録情報編集
+    get 'users/information/edit' => 'users#edit'
 
-    patch 'users/information/update' => 'users#update'
     # 顧客の登録情報更新
+    patch 'users/information/update' => 'users#update'
 
-    get 'users/check' => 'users#check', as: 'users_check'
     # 顧客の退会確認画面
+    get 'users/check' => 'users#check', as: 'users_check'
 
-    get 'users/withdrawal' => 'users#withdrawal', as: 'users_withdrawal'
     # 顧客の退会処理(ステータスの更新)
+    get 'users/withdrawal' => 'users#withdrawal', as: 'users_withdrawal'
 
-    resources :comments, only: [:create, :destroy]
     # コメント（送信、削除）
+    resources :comments, only: [:create, :destroy]
 
-    resources :chats, only: [:create, :destroy, :index, :show]
     # チャット（送信、削除）
+    resources :chats, only: [:create, :destroy, :index, :show]
 
-    resources :chat_rooms, only: [:show, :create, :index]
     # チャットルーム（画面、作成、一覧）
+    resources :chat_rooms, only: [:show, :create, :index]
 
+    # 検索（キーワードで投稿検索）
     get "search" => "searches#search"
-    # 検索（キーワードで投稿検索、会員検索）
 
-    resources :notifications, only: [:index, :destroy]
     # 通知機能、全削除
+    resources :notifications, only: [:index, :destroy]
 
     resources :users, only: [:index, :show, :edit, :update] do
       member do
@@ -66,20 +71,30 @@ Rails.application.routes.draw do
       resource :relationships, only: [:create, :destroy]
     end
 
-    get 'favorites' => 'favorites#index', as: "favorites"
     # いいね機能
+    get 'favorites' => 'favorites#index', as: "favorites"
 
+     # フォロー一覧
     get 'followings' => 'relationships#followings', as: "followings"
-    # フォロー一覧
 
-    get 'followers' => 'relationships#followers', as: "followers"
     # フォロワー一覧
+    get 'followers' => 'relationships#followers', as: "followers"
+
+    resources :post_images, only: [:new, :create, :index, :show, :destroy] do
+
+    end
 
     # get 'user' => 'users#index'
-    resources :posts, only: [:index, :new, :create, :show, :destroy] do
+
     # 投稿（一覧、新規作成画面、作成、詳細、削除）
-      resource :favorites, only: [:index, :destroy, :create]
+    
+    resources :posts, only: [:index, :new, :create, :show, :destroy] do
+      #投稿のコメント(作成、削除)
+       resources :post_comments, only: [:create, :destroy]
+
       # いいね（一覧、削除、追加）
+      resource :favorites, only: [:index, :destroy, :create]
+
     end
   end
 end

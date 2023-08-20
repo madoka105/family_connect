@@ -1,27 +1,116 @@
-<h2 style="text-align:center">
-  <%= "#{@partner.name}さんとのチャット" %>
-</h2>
-<div id="chats">
-  <% @chats.each do |chat| %>
-    <% if chat.user_id==current_user.id %>
-      <div class="mycomment">
-        <p><%= chat.sentence %></p>
+<div class="container">
+
+  <h2 class="py-3" style="text-align:center">
+    <%= "#{@partner.name}さんとのチャット" %>
+  </h2>
+  <%#= link_to("ログアウトする","/users/sign_out",method: :delete) %>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div id="chats">
+        <% @chats.each do |chat| %>
+          <% if chat.user_id==current_user.id %>
+            <div class="mycomment">
+              <p><%= chat.sentence %></p>
+            </div>
+          <% else %>
+            <div class="fukidasi">
+              <div class="chatting">
+                <div class="says">
+                  <p><%= chat.sentence %></p>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
       </div>
-    <% else %>
-      <div class="fukidasi">
-        <div class="chatting">
-          <div class="says">
-            <p><%= chat.sentence %></p>
-          </div>
+    </div>
+    <div class="col-md-6">
+
+      <div class="row">
+        <div class="col-md-3">
+          <h2>
+            <ruby>
+              挨拶
+              <rt>
+                あいさつ
+              </rt>
+            </ruby>
+          </h2>
+        </div>
+        <div class="col-md-9">
+          <p class="set-message badge badge-success" style="font-size: 100%;">おはようございます</p>
+          <p class="set-message badge badge-success" style="font-size: 100%;">こんばんわ</p>
+          <p class="set-message badge badge-success" style="font-size: 100%;">すこぶる元気です</p>
+          <p class="set-message badge badge-success" style="font-size: 100%;">おやすみなさい</p>
         </div>
       </div>
-    <% end %>
-  <% end %>
+
+      <hr>
+
+      <div class="row">
+        <div class="col-md-3">
+          <h2>
+            <ruby>
+              連絡
+              <rt>
+                れんらく
+              </rt>
+            </ruby>
+          </h2>
+        </div>
+        <div class="col-md-9">
+          <p class="set-message badge badge-success" style="font-size: 100%;">集まりませんか</p>
+          <p class="set-message badge badge-success" style="font-size: 100%;">外出してきます</p>
+          <p class="set-message badge badge-success" style="font-size: 100%;">病院に行きます</p>
+          <p class="set-message badge badge-success" style="font-size: 100%;">散歩に行きます</p>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="row">
+        <div class="col-md-3">
+          <h2>
+            <ruby>
+              緊急
+              <rt>
+                きんきゅう
+              </rt>
+            </ruby>
+          </h2>
+        </div>
+        <div class="col-md-9">
+          <p class="set-message badge badge-success" style="font-size: 100%;">体調が悪いです</p>
+          <p class="set-message badge badge-success" style="font-size: 100%;">助けてください</p>
+        </div>
+      </div>
+
+      <hr>
+
+      <form id="seed-form">
+        <div class="form-group">
+          <input type="text" id="sentence" placeholder="入力してね" class="form-control form-control-lg">
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-6 mx-auto">
+              <input type="submit" value="おくる" id="send" class="btn btn-lg btn-block btn-success">
+            </div>
+          </div>
+        </div>
+
+        <input id="current_user_id" type="hidden" value= "<%= current_user.id %>">
+        <input id="partner_id" type="hidden" value= "<%= @partner.id %>">
+      </form>
+    </div>
+  </div>
+
 </div>
-<form id="seed-form">
-  <input type="text" id="sentence" placeholder="入力してね" style="width:30%">
-  <input type="submit" value="送信" id="send">
-  <input id="current_user_id" type="hidden" value= "<%= current_user.id %>">
-  <input id="partner_id" type="hidden" value= "<%= @partner.id %>">
-</form>
-<%= link_to("ログアウトする","/users/sign_out",method: :delete) %>
+
+<script>
+  $('.set-message').click(function () {
+    $('#sentence').val($(this).text());
+  });
+</script>

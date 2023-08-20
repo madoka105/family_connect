@@ -11,7 +11,7 @@
     <tr>
       <td>
         <% if user.profile_image.attached? %>
-          <%= image_tag user.profile_image.url, size: '50x50' %>
+          <%= image_tag user.get_profile_image(100,100) %>
         <% end %>
       </td>
       <td><%= user.name %></td>

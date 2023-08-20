@@ -16,6 +16,9 @@
             <% @users.each do |user| %>
             <tr>
               <td>
+                <%= image_tag post_image.user.get_profile_image(100,100) %>
+              </td>
+              <td>
                 <%= user.id %>
               </td>
               <td>
@@ -25,10 +28,10 @@
               </td>
                <td><%#= render "public/relationships/btn", user: user, options: { class: "follow-link" } %></td>
                <td><%= render partial: "public/relationships/btn", locals: { user: current_user } %></td>
-            
+
                  <td>フォロー<%= user.followers.count %></td>
                  <td>フォロワー<%= user.followeds.count %></td>
-      
+
             </tr>
           <% end %>
           </tbody>

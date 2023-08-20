@@ -1,11 +1,11 @@
 <h1 class=text-center>自己紹介</h1>
 
 <table class="table">
-  <tr><%#= image_tag user.get_profile_image, size :'100x100' %></tr>
+  <tr><%#= image_tag user.get_profile_image(100,100) %></tr>
   <tr>
     <td>
       <% if user.profile_image.attached? %>
-        <%= image_tag user.profile_image.url, size: '50x50' %>
+        <%= image_tag user.get_profile_image(100,100) %>
       <% end %>
     </td>
   </tr>

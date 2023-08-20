@@ -57,3 +57,23 @@ if (!(location.pathname.includes('admin') || location.pathname == '/')) {
     });
   });
 }
+
+//   $(function() {
+//     $("#text").on("click", function (e) {
+//       const test = $("#text");
+//       console.log(text)
+//       appChat.speak(text)
+//       text.val("");     // 定型文を選択
+//       e.prevenDefault();
+//     });
+//   });
+
+// $(function() {
+//     $("#").on("click", function (e) {
+//       const test = $("#");
+//       console.log(text)
+//       appChat.speak(text)
+//       text.val("");     // カテゴリーを選択
+//       e.prevenDefault();
+//     });
+//   });
