@@ -1,1 +1,14 @@
-test 退会確認画面を作る
+<div class="container">
+  <div class="row">
+    <div class="col my-5 text-center">
+  <h1>本当に退会しますか？</h1>
+  <p>
+    退会すると、会員登録情報や<br>
+    これまでの投稿履歴が閲覧できなくなります。<br>
+    退会する場合は、「退会する」をクリックしてください。
+  </p>
+  <%= link_to "退会しない", user_path(current_user), :class => "btn btn-primary ms-3" %>
+  <%= link_to "退会する", users_withdrawal_path, method: :patch, :class => "btn btn-danger ms-3", data: { confirm: "本当に退会しますか？" }  %>
+</div>
+  </div>
+</div>

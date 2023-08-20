@@ -6,7 +6,7 @@ class Post < ApplicationRecord
   has_many :week_favorites, -> { where(created_at: 1.week.ago.beginning_of_day) }
   has_one :notification, as: :subject, dependent: :destroy
   has_many :post_comments, dependent: :destroy
-  
+
 
 
 

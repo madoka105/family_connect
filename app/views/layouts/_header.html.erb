@@ -43,9 +43,7 @@
       <%= render 'public/searches/search' %>
     <% end %>
   </div>
-  </li>
   <% if user_signed_in? %>
-  <!--<li class="nav-item" >-->
     <%= link_to notifications_path, class: "nav-link" do %>
       <%if current_user.notifications.where(checked: false).exists? %>
         <i class="fa-sharp fa-solid fa-bell fa-beat" style="color: #2ee7d;"></li>
@@ -54,7 +52,6 @@
       <%end %>
       通知一覧
     <% end %>
-  <!--</li>-->
   <% end %>
 </div>
 

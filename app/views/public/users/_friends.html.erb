@@ -9,7 +9,6 @@
   <tbody>
     <% users.each do |user| %>
     <tr>
-      <% if current_user != user %>
       <td>
         <% if user.profile_image.attached? %>
           <%= image_tag user.get_profile_image(100,100) %>
@@ -20,7 +19,6 @@
       <td>フォロワー数: <%= user.followeds.count %></td>
       <td><%= render "public/relationships/btn", user: user, options: { class: "follow-link" } %></td>
       <td><%= link_to "Show", user %></td>
-      <% end %>
     </tr>
     <% end %>
   </tbody>

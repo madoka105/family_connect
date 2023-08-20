@@ -61,24 +61,5 @@ GUEST_USER_EMAIL = "guest@example.com"
     end
     profile_image.variant(resize_to_limit: [height, width]).processed
   end
-
-  # インスタンスメソッド
-  def set_hello
-    @hello = "hello"
-  end
-
-  def get_hello
-    @hello
-  end
-
-  # クラスメソッド
-  def self.aaa
-    "aaa"
-  end
-
-  class << self
-    def bbb
-      "bbb"
-    end
-  end
 end
+ 
