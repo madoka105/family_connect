@@ -16,7 +16,7 @@
             <% @users.each do |user| %>
             <tr>
               <td>
-                <%= image_tag post_image.user.get_profile_image(100,100) %>
+                <%#= image_tag post_image.user.get_profile_image(100,100) %>
               </td>
               <td>
                 <%= user.id %>
@@ -27,7 +27,7 @@
               <td class= "<%= user.is_withdrawal ? 'text-gray' : 'text-green' %>"><%= user.is_withdrawal ? '退会済み' : '有効' %>
               </td>
                <td><%#= render "public/relationships/btn", user: user, options: { class: "follow-link" } %></td>
-               <td><%= render partial: "public/relationships/btn", locals: { user: current_user } %></td>
+               <td><%= render partial: "public/relationships/btn", locals: { user: user } %></td>
 
                  <td>フォロー<%= user.followers.count %></td>
                  <td>フォロワー<%= user.followeds.count %></td>

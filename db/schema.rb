@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(version: 2023_08_20_053919) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "name", null: false
+    t.date "birthday"
     t.string "phone_number"
     t.boolean "is_withdrawal", default: false
     t.datetime "created_at", precision: 6, null: false

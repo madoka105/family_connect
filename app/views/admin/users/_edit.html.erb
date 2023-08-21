@@ -1,3 +1,6 @@
+
+
+tetete
 <% if current_page?("/admin/users/#{user.id}/edit") == true %>
   <%= form_with model: @user, url: admin_user_path, method: :patch do |f| %>
   <table class="table">
@@ -53,11 +56,18 @@
         <td></td>
       </tr>
       <tr>
+        <td>写真</td>
+            <%= f.file_field :profile_image %>
+        </td>
+      </tr>
+      <tr>
         <td></td>
         <td><%= f.submit "編集内容を保存", class: "btn btn-success" %></td>
-        <td><%= link_to "退会する", users_withdrawal_path, class: "btn btn-danger" %></td>
+        <td><%= link_to "退会するfdfd", users_withdrawal_path, class: "btn btn-danger" %></td>
       </tr>
     </tbody>
   </table>
   <% end %>
 <% end %>
+
+<%= link_to "退会する", users_withdrawal_path, class: "btn btn-danger" %>

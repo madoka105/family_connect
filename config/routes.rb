@@ -35,7 +35,7 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     get "/homes/about" => "homes#about", as: "about"
     # 顧客のマイページ
-    get 'users/mypage' => 'users#show'
+    get 'users/mypage' => 'users#mypage'
 
     # 顧客の会員登録情報編集
     get 'users/information/edit' => 'users#edit'
@@ -64,7 +64,7 @@ Rails.application.routes.draw do
     # 通知機能、全削除
     resources :notifications, only: [:index, :destroy]
 
-    resources :users, only: [:show, :edit, :update] do
+    resources :users, only: [:index, :show, :edit, :update] do
       member do
         get :follows, :followers
       end
@@ -80,14 +80,9 @@ Rails.application.routes.draw do
     # フォロワー一覧
     get 'followers' => 'relationships#followers', as: "followers"
 
-    resources :post_images, only: [:new, :create, :index, :show, :destroy] do
-
-    end
-
     # get 'user' => 'users#index'
 
     # 投稿（一覧、新規作成画面、作成、詳細、削除）
-
     resources :posts, only: [:index, :new, :create, :show, :destroy] do
       #投稿のコメント(作成、削除)
        resources :post_comments, only: [:create, :destroy]

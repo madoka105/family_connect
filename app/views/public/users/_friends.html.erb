@@ -1,25 +1,28 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th>写真</th>
-      <th>お名前</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% users.each do |user| %>
-    <tr>
-      <td>
-        <% if user.profile_image.attached? %>
-          <%= image_tag user.get_profile_image(100,100) %>
+<h1 class=text-center>友達一覧</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>写真</th>
+        <th>お名前</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% users.each do |user| %>
+      <tr>
+        <% if current_user != user %>
+        <td>
+          <% if user.profile_image.attached? %>
+            <%= image_tag user.get_profile_image(100,100) %>
+          <% end %>
+        </td>
+        <td><%= user.name %></td>
+        <td>フォロー数: <%= user.followers.count %></td>
+        <td>フォロワー数: <%= user.followeds.count %></td>
+        <td><%= render "public/relationships/btn", user: user, options: { class: "follow-link" } %></td>
+        <td><%= link_to "Show", user_path(user) %></td>
         <% end %>
-      </td>
-      <td><%= user.name %></td>
-      <td>フォロー数: <%= user.followers.count %></td>
-      <td>フォロワー数: <%= user.followeds.count %></td>
-      <td><%= render "public/relationships/btn", user: user, options: { class: "follow-link" } %></td>
-      <td><%= link_to "Show", user %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>

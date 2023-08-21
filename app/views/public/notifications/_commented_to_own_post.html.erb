@@ -1,8 +1,8 @@
 <%= link_to transition_path(notification) do %>
   <div>
-    <%= link_to notification.subject.end_user.name, end_user_path(notification.subject.end_user) %>
+    <%= link_to notification.subject.user.name, user_path(notification.subject.user) %>
     があなたの
-    <%= link_to '投稿', post_workout_path(notification.subject.post_workout) %>
+    <%= link_to '投稿', post_path(notification.subject.post) %>
     にコメントしました。
     <%= " (#{time_ago_in_words(notification.created_at)}前)" %>
   </div>

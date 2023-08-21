@@ -4,21 +4,32 @@ class Public::UsersController < ApplicationController
   # フォロー一覧
   def follows
     user = User.find(params[:id])
-    @users = user.following_users
+    @users = user.following_users.where(is_withdrawal: false)
   end
 
   # フォロワー一覧
   def followers
     user = User.find(params[:id])
-    @user = user.follower_users
+    @user = user.follower_users.where(is_withdrawal: false)
   end
+  
+  def index
+    @users = User.all
+  end 
 
   def show
-    @users = User.where(is_withdrawal: false)
-    @id = params[:id] || current_user.id
-    @user = User.find(@id)
-    @following_users = @user.following_users
-    @follower_users = @user.follower_users
+    # where構文は、SQLと呼ばれるもので、
+    # その条件に一致したものを取得します。
+    @user = User.find(params[:id])
+    @users = @user.following_users.where(is_withdrawal: false)
+    @posts = @user.posts
+  end
+
+  def mypage
+    # where構文は、SQLと呼ばれるもので、
+    # その条件に一致したものを取得します。
+    @user = current_user
+    @users = @user.following_users.where(is_withdrawal: false)
   end
 
   def edit
@@ -41,37 +52,23 @@ class Public::UsersController < ApplicationController
   end
 
   public
-  
+
   def withdrawal
-    @user = current_user
-    @user.withdrawal_status = true
-    if @user.save
+      # current_user. = 現在のログインしているユーザーの情報
+      # @customer の中に現在ログインしているユーザーの情報を入れます。
+      @user = current_user
+      # 現在ログインしている、ユーザーのis_withdrawlをtrueに変更する
+      @user.update(is_withdrawal: true)
       reset_session
+      # deviceの機能でサインアウトを実行します。
+      sign_out @user # 退会処理後に自動でログアウトさせる
+      flash[:notice] = "退会処理が完了しました。ご利用いただきありがとうございました。"
       redirect_to root_path
-    end
   end
 
-def withdrawal
-    if params[:customer].present? # フォームにメールアドレスを送信した場合
-      @customer = Customer.find_by(email: params[:customer][:email])
-    if @customer&.valid_password?(params[:customer][:password])
-      @customer.update(withdrawn: true)
-      sign_out @customer # 退会処理後に自動でログアウトさせる
-      redirect_to customers_withdrawal_path, notice: "退会処理が完了しました。ご利用いただきありがとうございました。"
-    else
-      redirect_to customers_check_path, alert: "パスワードが間違っています。もう一度入力してください。"
-    end
-  else # フォームにメールアドレスを送信しない場合
-      @customer = current_customer
-      @customer.update(withdrawn: true)
-      sign_out @customer # 退会処理後に自動でログアウトさせる
-      redirect_to customers_withdrawal_path, notice: "退会処理が完了しました。ご利用いただきありがとうございました。"
-
-  end
-end
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :phone_number, :is_withdrawal)
+    params.require(:user).permit(:name, :email, :profile_image, :birthday, :phone_number)
   end
 end

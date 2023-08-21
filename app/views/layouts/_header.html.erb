@@ -46,12 +46,10 @@
   <% if user_signed_in? %>
     <%= link_to notifications_path, class: "nav-link" do %>
       <%if current_user.notifications.where(checked: false).exists? %>
-        <i class="fa-sharp fa-solid fa-bell fa-beat" style="color: #2ee7d;"></li>
+        <i class="fa-sharp fa-solid fa-bell fa-beat" style="color: #2EE7D;">通知一覧</i>
       <% else %>
-        <i class="fa-sharp fa-solid fa-bell"></i>
+        <i class="fa-sharp fa-solid fa-bell">通知一覧</i>
       <%end %>
-      通知一覧
     <% end %>
   <% end %>
 </div>
-

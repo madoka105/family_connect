@@ -42,6 +42,10 @@ GUEST_USER_EMAIL = "guest@example.com"
     end
   end
 
+  #def self.guest?
+  #  self.email == GUEST_USER_EMAIL
+  #end
+  
   # 検索方法
   def self.looks(word)
     @users = User.where("name LIKE?","%#{word}%")
@@ -50,10 +54,6 @@ GUEST_USER_EMAIL = "guest@example.com"
   has_one_attached :profile_image
 
    # プロフィール画像の取得メソッド
-  # def get_profile_image
-  #   profile_image.url
-  # end
-
   def get_profile_image(height,width)
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/default-image.png')
@@ -61,5 +61,9 @@ GUEST_USER_EMAIL = "guest@example.com"
     end
     profile_image.variant(resize_to_limit: [height, width]).processed
   end
+
+  # is_withdrawalがfalseならtrueを返すようにしている
+  def active_for_authentication?
+    super && (is_withdrawal == false)
+  end
 end
- 
