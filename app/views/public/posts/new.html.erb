@@ -1,4 +1,4 @@
-<!--新規投稿画面-->
+<!-- 新規投稿画面 -->
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-12 mt-5 mb-5 text-center">
@@ -7,41 +7,39 @@
   </div>
   <div class="row">
     <div class="col-sm-12 align-posts-center">
-      <%= form_with model: @post, url: '/posts', local:true do |f| %>
+      <%= form_with model: @post, url: '/posts', local: true do |f| %>
       
-      <div class="row justify-content-center-start">
-        <div class="col-sm-4">
-          <h4 class="col text-right">タイトル</h4>
+        <div class="row justify-content-center-start">
+          <div class="col-sm-4">
+            <h4 class="col text-right">タイトル</h4>
+          </div>
+          <div class="col-sm-8 mb-3">
+            <%= f.text_field :title, size: "40" %>
+          </div>
         </div>
-        <div class="col-sm-8 mb-3">
-          <%= f.text_field :title, size: "40" %>
+        
+        <div class="row justify-content-center-start">
+          <div class="col-sm-4">
+            <h4 class="col text-right">日記</h4>
+          </div>
+          <div class="col-sm-8 mb-3">
+            <%= f.text_field :text, size: "40x5" %>
+          </div>
         </div>
-      </div>
-      
-      <div class="row justify-content-center-start">
-        <div class="col-sm-4">
-          <h4 class="col text-right">日記</h4>
+        
+        <div class="row justify-content-center-start">
+          <div class="col-sm-4">
+            <h4 class="col text-right">写真</h4>
+          </div>
+          <div class="col-sm-8 mb-3">
+            <%= f.file_field :image, accept: 'image/*', size: "40x5" %>
+          </div>
         </div>
-        <div class="col-sm-8 mb-3">
-          <%= f.text_field :text, size: "40x5" %>
+        <div class="text-center">
+          <%= f.submit '投稿', class: "btn btn-success d-grid gap-2" %>
         </div>
-      </div>
-      
-      <div class="row justify-content-center-start">
-        <div class="col-sm-4">
-          <h4 class="col text-right">写真</h4>
-        </div>
-        <div class="col-sm-8 mb-3">
-          <%= f.file_field :image, accept: 'image/*', size: "40x5" %>
-        </div>
-      </div>
-      <div class="text-center">
-        <%= f.submit '投稿', class: "btn btn-success d-grid gap-2" %>
-      </div>
       
       <% end %>
     </div>
   </div>
 </div>
-
-

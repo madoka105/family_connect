@@ -1,48 +1,65 @@
 <!--投稿詳細画面-->
-<div class="container">
-  <div class="row my-3">
-    <h2>投稿詳細</h2>
-    <div class="col-xs-10 col-xs-offset-1" style="margin-top: 50px;">
-      <table class="table table-bordered">
-        <thead>
-          <tr class="table-head text-center" style="background-color:#F5F5F5;">
-            <th scope="col">投稿者</th>
-            <th scope="col">投稿日時</th>
-            <th scope="col">タイトル</th>
-            <th scope="col">投稿内容</th>
-            <th scope="col">写真</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><%= @post.user.name %></td>
-            <td><%= @post.created_at.strftime('%Y/%m/%d') %></td>
-            <td><%= @post.title %></td>
-            <td><%= @post.text %></td>
-            <td>
-              <% if @post.image.attached? %>
-                <%= image_tag @post.image, size: "350x250", class: "" %>
-              <% else %>
-                画像はありません
-              <% end %>
-            </td>
-          </tr>
-          <div>
-              <p>コメント件数:<%= @post.post_comments.count %></p>
-              <% @post.post_comments.each do |post_comment| %>
-                <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
-                <%= post_comment.user.name %>
-                <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
-              <% end %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>投稿詳細画面</title>
+</head>
+<body>
+    <h2 class="text-center my-3">投稿詳細</h2>
+    <div class="container my-2">
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-9">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="text-center" style="background-color:#F5F5F5;">
+                            <th>投稿者</th>
+                            <th>投稿日時</th>
+                            <th>タイトル</th>
+                            <th>投稿内容</th>
+                            <th>写真</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-center">
+                            <td><%= @post.user.name %></td>
+                            <td><%= @post.created_at.strftime('%Y/%m/%d') %></td>
+                            <td><%= @post.title %></td>
+                            <td><%= @post.text %></td>
+                            <td>
+                                <% if @post.image.attached? %>
+                                    <%= image_tag @post.image, size: "350x250", class: "" %>
+                                <% else %>
+                                    画像はありません
+                                <% end %>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="col-12 text-right">
+
+                    <%= form_with model: [@post, @post_comment] do |f| %>
+                        <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %><br>
+                        <%= f.submit "送信する" %>
+                    <% end %>
+
+                </div>
+
             </div>
-            <div>
-              <%= form_with model: [@post, @post_comment] do |f| %>
-                <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-                <%= f.submit "送信する" %>
-              <% end %>
+            <div class="col-3 overflow-auto" style= "width:300px; height:500px; ">
+                <p>コメント件数:<%= @post.post_comments.count %></p>
+                <% @post.post_comments.each do |post_comment| %>
+                    <p>
+                        <%= image_tag post_comment.user.get_profile_image(100,100) %>
+                        <%= post_comment.user.name %><br>
+                        <%= post_comment.created_at.strftime('%Y/%m/%d') %><br>
+                        <%= post_comment.comment %>
+                    </p>
+                <% end %>
+
+
             </div>
-        </tbody>
-      </table>
+        </div>
     </div>
-  </div>
-</div>
+
+</body>
+</html>

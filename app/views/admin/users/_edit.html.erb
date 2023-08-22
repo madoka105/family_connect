@@ -1,6 +1,4 @@
 
-
-tetete
 <% if current_page?("/admin/users/#{user.id}/edit") == true %>
   <%= form_with model: @user, url: admin_user_path, method: :patch do |f| %>
   <table class="table">

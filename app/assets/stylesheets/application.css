@@ -18,16 +18,17 @@
 header {
   width: 100%;
   height: 100%;
-  /*background-color: #A8DF8E;*/
+  background-color: #A8DF8E;
 }
 
 main {
   width: 100%;
   height: 100%;
+  padding-bottom: 5%;
  /*background-color: #F3FDE8;*/
 }
 
 footer {
   min-height: 50px;
   /*background-color: #FFE5E5;*/
-} 
+}
