@@ -1,11 +1,18 @@
-<h4>通知</h4>
-  <% if @notifications.present? %>
-    <%= link_to "全削除",notification_path(@notifications), method: :delete,class: "btn btn-light" %>
-    <% @notifications.each do |notification| %>
-      <%= render "#{notification.action_type}", notification: notification %>
-    <% end %>
-  <% else %>
-    通知はありません。
-  <% end %>
+<!--通知一覧画面-->
+<div class="container my-5" style="background-color:#EFF0FC;">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="text-center">通知</h1>
+      <% if @notifications.present? %>
+        <%= link_to "全削除", notification_path(@notifications), method: :delete, class: "btn btn-light" %>
+        <% @notifications.each do |notification| %>
+          <%= render "#{notification.action_type}", notification: notification %>
+        <% end %>
+      <% else %>
+        通知はありません。
+      <% end %>
+    </div>
+  </div>
+</div>
 
 

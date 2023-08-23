@@ -18,17 +18,27 @@
 header {
   width: 100%;
   height: 100%;
-  background-color: #A8DF8E;
+  background-color: #E6F4F1;
 }
 
 main {
   width: 100%;
   height: 100%;
   padding-bottom: 5%;
- /*background-color: #F3FDE8;*/
+  background-color: #FFF;
 }
 
 footer {
   min-height: 50px;
-  /*background-color: #FFE5E5;*/
+  background-color: #FFF;
+}
+
+
+originaml-btn {
+  background-color: #FFDF82;
+  border: 1px solid white;
+  border-radius: 5px;
+  width: 150px;
+  display: inline-block;
+  cursor: pointer;
 }

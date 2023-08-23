@@ -1,42 +1,31 @@
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <h2 class="text-center mt-5 md-5">会員一覧</h2>
-      <div class="d-flex align-items-center">
-        <table class="table text-center">
-          <thead>
-            <tr>
-              <th>会員ID</th>
-              <th>氏名</th>
-              <th>メールアドレス</th>
-              <th>ステータス</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @users.each do |user| %>
-            <tr>
-              <td>
-                <%#= image_tag post_image.user.get_profile_image(100,100) %>
-              </td>
-              <td>
-                <%= user.id %>
-              </td>
-              <td>
-                <%= user.email %>
-              </td>
-              <td class= "<%= user.is_withdrawal ? 'text-gray' : 'text-green' %>"><%= user.is_withdrawal ? '退会済み' : '有効' %>
-              </td>
-               <td><%#= render "public/relationships/btn", user: user, options: { class: "follow-link" } %></td>
-               <td><%= render partial: "public/relationships/btn", locals: { user: user } %></td>
+<!--ユーザー一覧-->
 
-                 <td>フォロー<%= user.followers.count %></td>
-                 <td>フォロワー<%= user.followeds.count %></td>
-
-            </tr>
-          <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
+<h1 class="text-center">会員一覧</h1>
+<table class="table" style="background-color:#F5F5F5;">
+  <thead>
+    <tr>
+      <th>写真</th>
+      <th>お名前</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+    <tr>
+      <% if current_user != user %>
+      <td>
+        <% if user.profile_image.attached? %>
+          <%= image_tag user.get_profile_image(100,100) %>
+        <% end %>
+      </td>
+      <td><%= user.name %></td>
+      <td>フォロー数: <%= user.followers.count %></td>
+      <td>フォロワー数: <%= user.followeds.count %></td>
+      <td><%= render "public/relationships/btn", user: user, options: { class: "follow-link" } %></td>
+      <td><%= link_to "Show", user %></td>
+      <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<div class="d-flex justify-content-center"><%= paginate(@user) %></div>

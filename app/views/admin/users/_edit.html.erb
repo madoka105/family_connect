@@ -17,9 +17,8 @@
         <td></td>
       </tr>
       <tr>
-        <td>
-          <td>メールアドレス</td>
-          <td><%= f.text_field :email, class: "form-control", style: "width: 300px;" %></td>
+        <td>メールアドレス</td>
+        <td><%= f.text_field :email, class: "form-control", style: "width: 300px;" %></td>
         <td></td>
       </tr>
       <tr>
@@ -61,11 +60,9 @@
       <tr>
         <td></td>
         <td><%= f.submit "編集内容を保存", class: "btn btn-success" %></td>
-        <td><%= link_to "退会するfdfd", users_withdrawal_path, class: "btn btn-danger" %></td>
+        <td><%= link_to "退会する", users_withdrawal_path, class: "btn btn-danger" %></td>
       </tr>
     </tbody>
   </table>
   <% end %>
 <% end %>
-
-<%= link_to "退会する", users_withdrawal_path, class: "btn btn-danger" %>
