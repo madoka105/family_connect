@@ -1,9 +1,9 @@
-<h2>Followers</h2>
+<h2 class="text-center my-3">Followers</h2>
 <table class='table'>
-  <thead>
+  <thead class="justify-content-center" style="background-color:#F5F5F5;">
     <tr>
-      <th>Image</th>
-      <th>name</th>
+      <th>写真</th>
+      <th>名前</th>
       <th></th>
       <th></th>
     </tr>
@@ -13,7 +13,7 @@
       <tr>
         <td>
           <%= link_to user_path(user) do %>
-            <%= image_tag user.get_profile_image(50,50) %>
+            <%= image_tag user.get_profile_image(100,100) %>
           <% end %>
         </td>
         <td><%= user.name %></td>
@@ -30,4 +30,5 @@
       </tr>
     <% end %>
   </tbody>
-</table> 
+</table>
+<div class="d-flex justify-content-center"><%= paginate(@users) %></div>

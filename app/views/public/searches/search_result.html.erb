@@ -1,14 +1,48 @@
-<h2>投稿の検索結果一覧</h2>
+<!--投稿一覧検索結果-->
+  <!--検索対象モデルがPostの時 -->
 
-<table class="table table-hover table-inverse">
-
-    <!--検索対象モデルがPostの時 -->
-    <tbody>
-      <% @posts.each do |post| %>
-        <tr>
-          <td><%= link_to post.title, post_path(post.id) %></td>
-          <td><%= post.text %></td>
-        </tr>
-      <% end %>
-    </tbody>
+<h2 class="text-center my-3">投稿の検索結果一覧</h2>
+<table class="table">
+  <thead class="justify-content-center" style="background-color:#F5F5F5;">
+    <tr>
+      <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">お名前</th>
+      <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">投稿日</th>
+      <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">題名</th>
+      <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">写真</th>
+      <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">お気に入り</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= post.user.name %></td>
+        <td>
+          <%= link_to post_path(post) do %>
+            <%= post.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+          <% end %>
+        </td>
+        <td><%= post.title %></td>
+        <td>
+          <% if post.image.attached? %>
+            <%= image_tag post.image, size: "150x100", style: "object-fit: cover;" %>
+          <% else %>
+            画像はありません
+          <% end %>
+        </td>
+        <% if user_signed_in? %>
+          <td><%= render 'public/favorites/btn', post: post %></td>
+        <% else %>
+          <td>
+            <%= link_to post_favorites_path(post), method: :post do %>
+              <%= image_tag 'bookmark.png', :size => '70x70' %>
+              <%= post.favorites.count %> いいね
+            <% end %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
+<div class="d-flex justify-content-center">
+  <%= paginate(@post) %>
+</div>

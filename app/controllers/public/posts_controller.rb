@@ -6,10 +6,12 @@ class Public::PostsController < ApplicationController
 
 
   def index
-    # @posts = Post.all.page(params[:page]).per(4)
     to = Time.current.at_end_of_day
     from = (to -6.day).at_beginning_of_day
-    posts = Post.includes(:favorites).sort_by { |post| -post.favorites.where(created_at: from...to).count }
+    posts = Post.includes(:favorites).order(created_at: :desc)
+    if params[:mypage]
+      posts = posts.where(user_id: current_user.id)
+    end
     @posts = Kaminari.paginate_array(posts).page(params[:page]).per(4)
     @post = Post.new
   end
@@ -24,11 +26,13 @@ class Public::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    # @post_image = PostImage.find(params[:id])
     @post_comment = PostComment.new
   end
 
   def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to posts_path
   end
 
   private

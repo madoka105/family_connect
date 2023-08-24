@@ -69,10 +69,9 @@ Rails.application.routes.draw do
         get :follows, :followers
       end
       resource :relationships, only: [:create, :destroy]
+      
+      resources :favorites, only: [:index]
     end
-
-    # いいね機能
-    get 'favorites' => 'favorites#index', as: "favorites"
 
      # フォロー一覧
     get 'followings' => 'relationships#followings', as: "followings"
@@ -86,9 +85,9 @@ Rails.application.routes.draw do
     resources :posts, only: [:index, :new, :create, :show, :destroy] do
       #投稿のコメント(作成、削除)
        resources :post_comments, only: [:create, :destroy]
-
+      
       # いいね（一覧、削除、追加）
-      resource :favorites, only: [:index, :destroy, :create]
+       resources :favorites, only: [:destroy, :create]
 
     end
   end

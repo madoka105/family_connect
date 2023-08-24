@@ -15,7 +15,7 @@
       </li>
     <% elsif admin_signed_in? %>
       <li class="nav-item m-1">
-        <%= link_to "投稿一覧", posts_path, class: "btn btn-outline-secondary btn-sm nav-btn" %>
+        <%= link_to "投稿一覧", admin_root_path, class: "btn btn-outline-secondary btn-sm nav-btn" %>
       </li>
       <li class="nav-item m-1">
         <%= link_to "会員一覧", admin_users_path, class: "btn btn-outline-secondary btn-sm nav-btn" %>
@@ -49,7 +49,7 @@
   <% if user_signed_in? %>
     <%= link_to notifications_path, class: "nav-link" do %>
       <%if current_user.notifications.where(checked: false).exists? %>
-        <i class="fa-sharp fa-solid fa-bell fa-beat" style="background-color:#F9F871;">通知一覧</i>
+        <i class="fa-sharp fa-solid fa-bell fa-beat" style="background-color:#E5BEEC;">通知一覧</i>
       <% else %>
         <i class="fa-sharp fa-solid fa-bell">通知一覧</i>
       <%end %>

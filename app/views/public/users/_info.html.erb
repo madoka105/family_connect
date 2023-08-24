@@ -1,25 +1,28 @@
+<!--ログインしているユーザーのマイページ-->
+
 <h1 class="text-center">自己紹介</h1>
 
 <table class="table" style="background-color:#FCFCD4;">
+  <thead class="text-left">
     <tr>
-    <th>
-      <% if user.profile_image.attached? %>
-        <%= image_tag user.get_profile_image(150, 150) %>
-      <% end %>
-    </th>
-  </tr>
-  <tr>
-    <th>お名前</th>
-    <th><%= user.name %></th>
-  </tr>
-  <tr>
-    <th>誕生日</th>
-    <th><%= user.birthday %></th>
-  </tr>
-  <tr>
-    <th>過去の日記</th>
-    <th><%= link_to "見てみる", posts_path %></th>
-  </tr>
+      <th>
+        <% if user.profile_image.attached? %>
+          <%= image_tag user.get_profile_image(150, 150) %>
+        <% end %>
+      </th>
+    </tr>
+    <tr>
+      <th>お名前</th>
+      <th><%= user.name %></th>
+    </tr>
+    <tr>
+      <th>誕生日</th>
+      <th><%= user.birthday %></th>
+    </tr>
+    <tr>
+      <th>過去の日記</th>
+      <th><%= link_to "見てみる", posts_path(mypage: true) %></th>
+    </tr>
   </thead>
 </table>
 
@@ -36,11 +39,9 @@
     <%= user.followers.count %><br>
   <% end %>
 
-
-<div class="mx-5">
-  フォロワー数：<%= link_to followers_user_path(user) do %>
-    <%= user.followeds.count %><br>
-  <% end %>
+  <div class="mx-5">
+    フォロワー数：<%= link_to followers_user_path(user) do %>
+      <%= user.followeds.count %><br>
+    <% end %>
+  </div>
 </div>
-</div>
-

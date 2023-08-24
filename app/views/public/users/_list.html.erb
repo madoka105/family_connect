@@ -2,12 +2,11 @@
 
 <div class="container mt-3 md-2">
   <h2 class="text-center">日記一覧</h2>
-  <div class="justify-content-center mt-2">
-</div>
+  <div class="justify-content-center mt-2"></div>
   <div class="row">
     <div class="table post_table table-inverse">
       <table>
-         <thead class="table-info">
+        <thead class="table-info">
           <tr>
             <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">お名前</th>
             <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">投稿日</th>
@@ -16,32 +15,30 @@
           </tr>
         </thead>
         <tbody>
-        <% @posts.each do |post| %>
-          <tr>
-            <td><%= post.user.name %></td>
-            <td>
-              <%= link_to post_path(post) do %>
-                <%= post.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
-              <% end %>
-            </td>
-            <td><%= post.text %></td>
-            <%# unless @user == current_user %>
-
-            ️<%# end %>
-            <% if user_signed_in? %>
-            <td><%= render 'public/favorites/btn', post: post %></td>
-            <% else %>
-                <td><%= link_to post_favorites_path(post), method: :post do %>
-                    <%= image_tag 'bookmark.png', :size => '70x70' %>
+          <% @posts.each do |post| %>
+            <tr>
+              <td><%= post.user.name %></td>
+              <td>
+                <%= link_to post_path(post) do %>
+                  <%= post.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+                <% end %>
+              </td>
+              <td><%= post.text %></td>
+              <% if user_signed_in? %>
+                <td><%= render 'public/favorites/btn', post: post %></td>
+              <% else %>
+                <td>
+                  <%= link_to post_favorites_path(post), method: :post do %>
+                    <%= image_tag 'bookmark.png', size: '70x70' %>
                     <%= post.favorites.count %> いいね
-                    <% end %>
+                  <% end %>
                 </td>
-            <% end %>
-          </tr>
-        <% end %>
+              <% end %>
+            </tr>
+          <% end %>
         </tbody>
       </table>
-      <div class="d-flex justify-content-center"><%#= paginate(@posts) %></div>
+      <div class="d-flex justify-content-center"><%= paginate(@post) %></div>
     </div>
   </div>
 </div>

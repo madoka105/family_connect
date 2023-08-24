@@ -1,13 +1,33 @@
-<h2>会員の検索結果一覧</h2>
+<!--会員一覧検索結果-->
+  <!--検索対象モデルがUserの時 -->
 
-<table class="table table-hover table-inverse">
+<h2 class="text-center my-3">会員の検索結果一覧</h2>
+<table class="table">
+  <thead class="justify-content-center" style="background-color:#F5F5F5;">
+    <tr>
+      <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">会員ID</th>
+      <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">氏名</th>
+      <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">メールアドレス</th>
+      <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">ステータス</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+    <tr>
+      <td><%= user.id %></td>
+      <td><%= link_to (user.name), admin_user_path(user.id) %></td>
+      <td><%= user.email %></td>
+      <td><% if user.is_withdrawal %>
+            <span class="text-muted">退会済み</span>
+          <% else %>
+            <span class="text-success"><strong>有効</strong></span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 
-    <!--検索対象モデルがUserの時 -->
-    <tbody>
-      <% @users.each do |user| %>
-        <tr>
-          <td><%= link_to user.name, admin_user_path(user.id) %></td>
-        </tr>
-      <% end %>
-    </tbody>
 </table>
+<div class="d-flex justify-content-center">
+  <%= paginate @searches %>
+</div>

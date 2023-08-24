@@ -1,4 +1,5 @@
 <!--他のユーザーのマイページ-->
+
 <div class="container">
   <div class="row my-3">
     <div class="col-4">
@@ -12,6 +13,7 @@
       <% end %>
     </div>
   </div>
+  <%= link_to "お気に入り", user_favorites_path(@user.id) %>
 </div>
 
 

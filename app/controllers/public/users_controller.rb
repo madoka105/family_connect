@@ -3,12 +3,14 @@ class Public::UsersController < ApplicationController
 
   # フォロー一覧
   def follows
+    @user = User.all.page(params[:page]).per(4)
     user = User.find(params[:id])
     @users = user.following_users.where(is_withdrawal: false)
   end
 
   # フォロワー一覧
   def followers
+    @users = User.all.page(params[:page]).per(4)
     user = User.find(params[:id])
     @user = user.follower_users.where(is_withdrawal: false)
   end
@@ -24,6 +26,7 @@ class Public::UsersController < ApplicationController
     @user = User.find(params[:id])
     @users = @user.following_users.where(is_withdrawal: false)
     @posts = @user.posts
+    @post = User.all.page(params[:page]).per(4)
   end
 
   def mypage

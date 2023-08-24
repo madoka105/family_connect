@@ -2,8 +2,10 @@
   <tbody>
     <tr>
       <td>
-        <% @chat_partners.each do |chat_partner| %>
-          <%= link_to "#{chat_partner.name}さんとのトークルーム","/chats/#{chat_partner.id}" %>
+        <% if !@chat_partners.empty? %>
+          <% @chat_partners.each do |chat_partner| %>
+            <%= link_to "#{chat_partner.name}さんとのトークルーム","/chats/#{chat_partner.id}" %>
+          <% end %>
         <% end %>
       </td>
     </tr>
