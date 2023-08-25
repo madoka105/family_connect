@@ -6,6 +6,7 @@
       <table>
          <thead class="table-info">
           <tr>
+            <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">会員ID</th>
             <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">氏名</th></th>
             <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">投稿日</th>
             <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">投稿内容</th>
@@ -14,9 +15,10 @@
         <tbody>
         <% @posts.each do |post| %>
           <tr>
+            <td><%= post.user_id %></td>
             <td><%= post.user.name %></td>
             <td>
-              <%= link_to post_path(post) do %>
+              <%= link_to admin_post_path(post) do %>
                 <%= post.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
               <% end %>
             </td>

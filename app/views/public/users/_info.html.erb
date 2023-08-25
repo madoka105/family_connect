@@ -23,6 +23,10 @@
       <th>過去の日記</th>
       <th><%= link_to "見てみる", posts_path(mypage: true) %></th>
     </tr>
+    <tr>
+      <th>お気に入り</th>
+      <th><%= link_to "見てみる", user_favorites_path(@user.id) %></th>
+    </tr>
   </thead>
 </table>
 

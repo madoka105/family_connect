@@ -22,6 +22,8 @@
           <li class="nav-item ml-auto">
             ようこそ、<%= current_user.name %>さん！
           </li>
+          <% elsif admin_signed_in? %>
+            管理者ログイン中
           <% else %>
           <% end %>
         </ul>
