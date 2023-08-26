@@ -4,7 +4,6 @@ class Public::PostsController < ApplicationController
     @post = Post.new
   end
 
-
   def index
     to = Time.current.at_end_of_day
     from = (to -6.day).at_beginning_of_day
@@ -19,9 +18,13 @@ class Public::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    @post.save
+    if  @post.save
       flash[:notice] = "投稿が成功しました。"
-    redirect_to posts_path
+      redirect_to posts_path
+    else
+      flash[:alret] = "投稿に失敗しました。"
+      render index
+    end
   end
 
   def show
@@ -32,7 +35,8 @@ class Public::PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to posts_path
+      flash[:alret] = "投稿を削除しました。"
+      redirect_to posts_path
   end
 
   private

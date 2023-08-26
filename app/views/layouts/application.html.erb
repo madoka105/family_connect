@@ -37,7 +37,14 @@
     </nav>
   </header>
 
+
   <main>
+    <div class="text-success">
+      <%= flash[:notice] %>
+    </div>
+    <div class="text-danger">
+      <%= flash[:alret] %>
+    </div>
     <%= yield %>
   </main>
   <footer class="mx-0 bg-black bg-opacity-75 text-center text-dark">
