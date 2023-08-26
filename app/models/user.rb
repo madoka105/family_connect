@@ -1,6 +1,4 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :posts, dependent: :destroy
@@ -18,6 +16,9 @@ class User < ApplicationRecord
   has_many :following_users, through: :followers, source: :followed
   has_many :follower_users, through: :followeds, source: :follower
 
+  # バリデーション（一意性を持たせ、かつ1～20文字の範囲で設定）
+  validates :name, uniqueness: true,length: { minimum: 1, maximum: 20 }
+
   #フォローしたときの処理
   def follow(user_id)
     followers.create(followed_id: user_id)
@@ -33,25 +34,21 @@ class User < ApplicationRecord
     following_users.include?(user)
   end
 
+# ゲストユーザー（一時的なログインを行うための仮のユーザー）を生成するためのメソッド
 GUEST_USER_EMAIL = "guest@example.com"
 
   def self.guest
     find_or_create_by!(email: GUEST_USER_EMAIL) do |user|
       user.password = SecureRandom.urlsafe_base64
       user.name = "guestuser"
-      # user.confirmed_at = Time.now  Confirmable を使用している場合は必要
-      # 例えば name を入力必須としているのならば, user.name = "ゲスト" なども必要
     end
   end
 
-  #def self.guest?
-  #  self.email == GUEST_USER_EMAIL
-  #end
-  
   # 検索方法
   def self.looks(word)
     @users = User.where("name LIKE?","%#{word}%")
   end
+
 
   has_one_attached :profile_image
 
@@ -64,7 +61,7 @@ GUEST_USER_EMAIL = "guest@example.com"
     profile_image.variant(resize_to_limit: [height, width]).processed
   end
 
-  # is_withdrawalがfalseならtrueを返すようにしている
+  # is_withdrawalがfalseならtrueを返すようにしている(アカウントが有効な状態であるかどうかを確認)
   def active_for_authentication?
     super && (is_withdrawal == false)
   end

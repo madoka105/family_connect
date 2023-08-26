@@ -6,7 +6,9 @@
   <thead class="text-left">
     <tr>
       <th>
-        <%= image_tag user.get_profile_image(150, 150) %>
+        <% if user.profile_image.attached? %>
+          <%= image_tag user.get_profile_image(150, 150) %>
+        <% end %>
       </th>
     </tr>
     <tr>
@@ -16,10 +18,6 @@
     <tr>
       <th>誕生日</th>
       <th><%= user.birthday %></th>
-    </tr>
-    <tr>
-      <th>過去の日記</th>
-      <th><%= link_to "見てみる", posts_path(mypage: true) %></th>
     </tr>
     <tr>
       <th>お気に入り</th>

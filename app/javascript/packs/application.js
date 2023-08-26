@@ -19,3 +19,7 @@ import "../stylesheets/application";
 Rails.start()
 // Turbolinks.start()
 ActiveStorage.start()
+
+require("@rails/activestorage").start()
+require("channels")
+require('./preview') 

@@ -15,6 +15,7 @@ class Public::ChatsController < ApplicationController
   end
 
   def show
+    @user = current_user
     @partner = User.find(params[:id])
 
     @chats_by_myself = Chat.where(user_id: current_user.id, partner_id: @partner.id)

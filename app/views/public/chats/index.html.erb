@@ -1,15 +1,28 @@
-<table class="rooms">
+<h2 class="text-center">ルーム一覧</h2>
+<table class="table table-striped">
   <tbody>
     <tr>
       <td>
+        <!--名前からroomの詳細へ飛べるようにリンク化-->
         <% if !@chat_partners.empty? %>
+        <div class="list-group">
           <% @chat_partners.each do |chat_partner| %>
-            <%= link_to "#{chat_partner.name}さんとのトークルーム","/chats/#{chat_partner.id}" %>
+            <div class="list-group-item">
+              <%= image_tag chat_partner.get_profile_image(60, 60) %>
+              <%= link_to "#{chat_partner.name}さんとのトークルーム","/chats/#{chat_partner.id}" %>
+            </div>
+            
+            <!--ユーザーのプロフィール画像を表示させたい-->
+            <%#=  has_one_attached_image_tag chats.partner_id, :user_image, format: 'jpeg', class: "round_image", fallback: "no_image.svg", size: "30x30" %>
           <% end %>
         <% end %>
+        </div>
+      </td>
+      <td>
+        <h6 style="color: #COCOCO;"><%#= chats.updated_at.strftime("%Y/%m/%d %H:%M") %></h6>
       </td>
     </tr>
   </tbody>
 </table>
-<%= link_to("ログインページへ","/") %>
-<%= link_to("ログアウトする","/users/sign_out",method: :delete )%>
+<%#= link_to("ログインページへ","/") %>
+<%#= link_to("ログアウトする","/users/sign_out",method: :delete )%>

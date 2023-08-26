@@ -64,13 +64,14 @@ Rails.application.routes.draw do
     # 通知機能、全削除
     resources :notifications, only: [:index, :destroy]
 
-    resources :users, only: [:index, :show, :edit, :update] do
+     resources :users, only: [:index, :show, :edit, :update] do
+       resources :favorites, only: [:index]
       member do
         get :follows, :followers
+        # get :favorites
       end
+
       resource :relationships, only: [:create, :destroy]
-      
-      resources :favorites, only: [:index]
     end
 
      # フォロー一覧
@@ -85,9 +86,9 @@ Rails.application.routes.draw do
     resources :posts, only: [:index, :new, :create, :show, :destroy] do
       #投稿のコメント(作成、削除)
        resources :post_comments, only: [:create, :destroy]
-      
+
       # いいね（一覧、削除、追加）
-       resources :favorites, only: [:destroy, :create]
+      resources :favorites, only: [:destroy, :create]
 
     end
   end

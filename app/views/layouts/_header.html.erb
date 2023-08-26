@@ -46,13 +46,16 @@
       <%= render 'public/searches/search' %>
     <% end %>
   </div>
-  <% if user_signed_in? %>
-    <%= link_to notifications_path, class: "nav-link" do %>
-      <%if current_user.notifications.where(checked: false).exists? %>
-        <i class="fa-sharp fa-solid fa-bell fa-beat" style="background-color:#E5BEEC;">通知一覧</i>
-      <% else %>
-        <i class="fa-sharp fa-solid fa-bell">通知一覧</i>
-      <%end %>
+  <div class="nav-item">
+    <% if user_signed_in? %> <!-- ログインしているかどうかの条件分岐 -->
+      <%= link_to notifications_path, class: "nav-link" do %>
+        <% if current_user.notifications.where(checked: false).exists? %>
+          <i class="fa-sharp fa-solid fa-bell fa-beat" style="color: #FF4F00;"></i>
+        <% else %>
+          <i class="fa-sharp fa-solid fa-bell"></i>
+        <% end %>
+        通知一覧
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>

@@ -3,6 +3,7 @@ class Post < ApplicationRecord
   belongs_to :user
 
   has_many :favorites, dependent: :destroy
+  has_many :favorited_users, through: :favorites, source: :user
   has_many :week_favorites, -> { where(created_at: 1.week.ago.beginning_of_day) }
   has_one :notification, as: :subject, dependent: :destroy
   has_many :post_comments, dependent: :destroy

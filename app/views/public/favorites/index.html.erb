@@ -10,6 +10,7 @@
             <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">タイトル</th>
             <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">更新日時</th>
             <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">更新者</th>
+            <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">写真</th>
             <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">「いいね！」の数</th>
           </tr>
         </thead>
@@ -24,9 +25,23 @@
               </td>
               <td><%= post.user.name %></td>
               <td>
-                <%= link_to post_favorites_path(post), method: :post do %>
-                  <%= image_tag 'bookmark.png', :size => '70x70' %>
-                  <%= post.favorites.count %> いいね
+                <% if post.image.attached? %>
+                    <%= image_tag post.image, size: "150x100",style: "object-fit: cover;" %>
+                <% else %>
+                    画像はありません
+                <% end %>
+              </td>
+              <td>
+                <% if post.favorited_by?(current_user) %>
+                  <%= link_to post_favorite_path(post, post.favorites.find_by(user_id: current_user.id)), method: :delete do %>
+                    <%= image_tag 'smile.png', :size => '70x70' %>
+                    <%= post.favorites.count %> いいね
+                  <% end %>
+                <% else %>
+                  <%= link_to post_favorites_path(post), method: :post do %>
+                    <%= image_tag 'bookmark.png', :size => '70x70' %>
+                    <%= post.favorites.count %> いいね
+                  <% end %>
                 <% end %>
               </td>
             </tr>

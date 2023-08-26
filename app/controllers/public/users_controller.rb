@@ -1,5 +1,11 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!#, only: [:index]
+  # before_action :set_user, only: [:favorites]
+
+  # def favorites
+  #   favorites = Favorite.where(user_id: :@user.id).pluck(:post_id)
+  #   @favorite_posts = Post.find(favorites)
+  # end
 
   # フォロー一覧
   def follows
@@ -14,11 +20,11 @@ class Public::UsersController < ApplicationController
     user = User.find(params[:id])
     @user = user.follower_users.where(is_withdrawal: false)
   end
-  
+
   def index
     @users = User.all
     @user = User.all.page(params[:page]).per(4)
-  end 
+  end
 
   def show
     # where構文は、SQLと呼ばれるもので、
@@ -45,7 +51,8 @@ class Public::UsersController < ApplicationController
     # 編集フォームから送信されたパラメータで顧客情報を更新します
     @user = current_user
     if @user.update(user_params)
-      redirect_to users_mypage_path notice: "登録情報を更新しました。"
+      flash[:notice] = "登録情報を更新しました。"
+      redirect_to users_mypage_path
     else
       render :edit
     end
@@ -75,4 +82,9 @@ class Public::UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :profile_image, :birthday, :phone_number)
   end
+
+
+  # def set_user
+  #   @user = User.find(params[:id])
+  # end
 end

@@ -28,7 +28,7 @@
                   <%= post.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
                 <% end %>
               </td>
-              <td><%= post.text %></td>
+              <td><%= post.title %></td>
               <td>
                 <% if post.image.attached? %>
                     <%= image_tag post.image, size: "150x100",style: "object-fit: cover;" %>

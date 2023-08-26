@@ -34,11 +34,16 @@ footer {
 }
 
 
-originaml-btn {
+.original-btn {
   background-color: #FFDF82;
-  border: 1px solid white;
+  border: 5px solid white;
   border-radius: 5px;
-  width: 150px;
+  width: 100px;
   display: inline-block;
   cursor: pointer;
+}
+
+.new-img {
+  width: 400px;
+  object-fit: cover;
 }

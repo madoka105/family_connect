@@ -3,19 +3,32 @@
   <h2 class="py-3" style="text-align:center">
     <%= "#{@partner.name}さんとのチャット" %>
   </h2>
-  <%#= link_to("ログアウトする","/users/sign_out",method: :delete) %>
 
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 overflow-auto" style="height: 400px;"> <!-- 親要素の高さを設定 -->
       <div id="chats">
         <% @chats.each do |chat| %>
           <% if chat.user_id==current_user.id %>
-            <div class="mycomment">
-              <p><%= chat.sentence %></p>
+            <div class="fukidasi">
+              <div class="mycomment">
+                <p><%= chat.sentence %></p>
+              </div>
+              <div class="text-right">
+                <% if @user.profile_image.attached? %>
+                  <%= image_tag @user.get_profile_image(60,60) %>
+                  <div class="name"><%= @user.name %></div>
+                <% end %>
+              </div>
             </div>
           <% else %>
             <div class="fukidasi">
+              <div class="text-left">
+                <% if @partner.profile_image.attached? %>
+                  <%= image_tag @partner.get_profile_image(60,60) %>
+                <% end %>
+              </div>
               <div class="chatting">
+                <div class="name"><%= @partner.name %></div>
                 <div class="says">
                   <p><%= chat.sentence %></p>
                 </div>
