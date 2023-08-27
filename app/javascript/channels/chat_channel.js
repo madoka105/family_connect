@@ -1,3 +1,5 @@
+/* global $*/
+/* global location*/
 import consumer from "./consumer"
 
 if (!(location.pathname.includes('admin') || location.pathname == '/')) {
@@ -12,28 +14,51 @@ if (!(location.pathname.includes('admin') || location.pathname == '/')) {
 
     received(data) {
       let insertText = ""
+      let my_image  = `<img src="${$("#user_image").attr('src')}">`;
+      let partner_image = `<img src="${$("#partner_image").attr('src')}">`;
+      let my_name = $("#current_user_name").val();
+      let partner_name = $("#partner_name").val();
       console.log(data.sentence)
       // 画面を開いているのがチャット送信者だった場合
       if (data["isCurrent_user"] == true) {
+
         insertText = `
-          <div class="mycomment">
-            <p>${data.sentence}</p>
-          </div>
+            <div class="fukidasi">
+              <div class="mycomment">
+                <div class="text-right">
+                  ${my_image}
+                  <div class="name">${my_name}</div>
+                </div>
+                <p>${data.sentence}</p>
+              </div>
+            </div>
         `;
       }
       // 画面を開いているのがチャット受信者だった場合
       else {
         insertText = `
-          <div class="fukidasi">
-            <div class="chatting">
-              <div class="says">
+            <div class="fukidasi">
+              <div class="text-left">
+                  ${partner_image}
+              </div>
+              <div class="chatting">
+                <div class="name">
+                  ${partner_name}
+                </div>
+                <div class="says">
                 <p>${data.sentence}</p>
+                </div>
               </div>
             </div>
-          </div>
         `;
       }
-      $("#chats").append(insertText); // Called when there's incoming data on the websocket for this channel
+      $("#chats").append(insertText);
+      // Called when there's incoming data on the websocket for this channel
+      setTimeout(function(){
+        var objDiv = document.getElementById("chat_container");
+　　　  objDiv.scrollTop = objDiv.scrollHeight;
+      },200)
+
     },
 
     speak(sentence) {

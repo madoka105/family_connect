@@ -3,13 +3,17 @@
 <h1 class="text-center">自己紹介</h1>
 
 <table class="table" style="background-color:#FCFCD4;">
-  <thead class="text-left">
+  <thead class="justify-content-center">
     <tr>
-      <th>
-        <%= image_tag user.get_profile_image(150, 150), class: "rounded-circle" %>
+      <th class="align-middle text-center">
+        <div class="d-flex justify-content-center align-items-center" style="height: 150px;"> <!-- 高さの調整 -->
+        　<div class="mx-auto">
+        　   <%= image_tag user.get_profile_image(150, 150), class: "rounded-circle" %>
+        　</div>
+        </div>
       </th>
     </tr>
-    <tr>
+    <tr class="text-left">
       <th>お名前</th>
       <th><%= user.name %></th>
     </tr>

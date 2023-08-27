@@ -1,6 +1,6 @@
 <!-- いいね一覧画面 -->
 
-<div class="container mt-5 md-2">
+<div class="container mt-4">
   <h2 class="text-center">お気に入り一覧</h2>
   <div class="row">
     <div class="table post_table table-inverse">
@@ -48,6 +48,7 @@
           <% end %>
         </tbody>
       </table>
+      <div class="d-flex justify-content-center"><%= paginate(@posts) %></div>
     </div>
   </div>
 </div>

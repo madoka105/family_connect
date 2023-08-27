@@ -48,7 +48,7 @@
             </div>
             <div class="col-lg-3 overflow-auto" style="width: 300px; height: 500px;">
                 <p>コメント件数:<%= @post.post_comments.count %></p>
-                <% @post.post_comments.each do |post_comment| %>
+                <% @post.post_comments.reverse_each do |post_comment| %>
                     <p>
                         <%= image_tag post_comment.user.get_profile_image(100,100) %>
                         <%= post_comment.user.name %><br>

@@ -1,7 +1,7 @@
-<% if current_user != user %> 
+<% if current_user != user %>
   <% if current_user.following?(user) %>
-    <%= link_to "はなれる", user_relationships_path(user.id), method: :delete, class: "btn btn-secondary" %>
+    <%= link_to "はなれる", user_relationships_path(user.id), method: :delete, class: "hanareru-btn" %>
   <% else %>
-    <%= link_to "つながる", user_relationships_path(user.id), method: :post, class:"btn btn-success" %>
+    <%= link_to "つながる", user_relationships_path(user.id), method: :post, class: "tunagaru-btn" %>
   <% end %>
 <% end %>

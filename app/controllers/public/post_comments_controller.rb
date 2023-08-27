@@ -8,14 +8,14 @@ class Public::PostCommentsController < ApplicationController
       flash[:notice] = "コメントの投稿をしました。"
       redirect_to post_path(post)
     else
-      flash[:alret] = "コメントの投稿に失敗しました。"
+      flash[:alert] = "コメントの投稿に失敗しました。"
       request.referer
     end
   end
 
   def destroy
     PostComment.find(params[:id]).destroy
-      flash[:alret] = "コメントを削除しました。"
+      flash[:alert] = "コメントを削除しました。"
       redirect_to post_path(params[:post_id])
   end
 

@@ -1,22 +1,22 @@
 <!--会員ログイン画面-->
 <div class="container my-5">
   <div class="row px-4">
-    <h1 class="col-12 mb-5 text-center">ログイン</h1>
+    <h1 class="col-lg-12 mb-5 text-center">ログイン</h1>
   </div>
 
   <div class="row ml-5">
-    <h5 class="col-12 mb-3 text-center">会員の方はこちらからログイン</h5>
+    <h5 class="col-lg-12 mb-3 text-center">会員の方はこちらからログイン</h5>
   </div>
 
-  <div class="col-12 registrations">
+  <div class="col-lg-12 registrations">
     <%= form_with model: @user, url: user_session_path do |f| %>
       <div class="field row justify-content-center mt-2">
-        <label class="col-2">メールアドレス</label>
+        <label class="col-lg-2">メールアドレス</label>
           <%= f.email_field :email, :size => "40", autofocus: true, placeholder: "sample@sample.com", autocomplete: "email" %>
       </div>
 
       <div class="field row justify-content-center mt-2">
-        <label class="col-2">パスワード</label>
+        <label class="col-lg-2">パスワード</label>
           <%= f.password_field :password, :size => "40", autofocus: true, placeholder: "123456", autocomplete: "password" %>
       </div>
       <div class="row justify-content-center mt-2">
@@ -27,7 +27,11 @@
     <% end %>
   </div>
 </div>
+<div class="col-lg-12">
+  <%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, class: "btn btn-secondary btn-lg btn-block sign_in", method: :post %>
+</div>
 
 
-<%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block sign_in", method: :post %>
+  
+
 

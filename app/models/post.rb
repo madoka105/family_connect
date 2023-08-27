@@ -8,8 +8,8 @@ class Post < ApplicationRecord
   has_one :notification, as: :subject, dependent: :destroy
   has_many :post_comments, dependent: :destroy
 
-
-
+  validates :title, presence: true, length: { minimum: 1, maximum: 20}
+  validates :text, presence: true, length: { minimum: 1, maximum: 50}
 
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)

@@ -22,8 +22,8 @@ class Public::PostsController < ApplicationController
       flash[:notice] = "投稿が成功しました。"
       redirect_to posts_path
     else
-      flash[:alret] = "投稿に失敗しました。"
-      render index
+      flash[:alert] = "投稿に失敗しました。"
+      redirect_to posts_path
     end
   end
 
@@ -35,7 +35,7 @@ class Public::PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-      flash[:alret] = "投稿を削除しました。"
+      flash[:alert] = "投稿を削除しました。"
       redirect_to posts_path
   end
 

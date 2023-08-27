@@ -36,11 +36,42 @@ footer {
 
 .original-btn {
   background-color: #FFDF82;
-  border: 5px solid white;
+  border: 8px solid #FFDF82;
   border-radius: 5px;
   width: 100px;
   display: inline-block;
   cursor: pointer;
+  text-align: center;
+}
+
+.hanareru-btn {
+  background-color: #49D698;
+  border: 8px solid #49D698;
+  border-radius: 5px;
+  width: 100px;
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+}
+
+.tunagaru-btn {
+  background-color: #FB9038;
+  border: 8px solid #FB9038;
+  border-radius: 5px;
+  width: 100px;
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+}
+
+.show-btn {
+  background-color: #F5B3C2;
+  border: 8px solid #F5B3C2;
+  border-radius: 5px;
+  width: 100px;
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
 }
 
 .new-img {

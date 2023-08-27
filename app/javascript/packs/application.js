@@ -22,4 +22,9 @@ ActiveStorage.start()
 
 require("@rails/activestorage").start()
 require("channels")
-require('./preview') 
+require('./preview')
+
+$( window ).on("load", function() {
+    var objDiv = document.getElementById("chat_container");
+　　objDiv.scrollTop = objDiv.scrollHeight;
+});

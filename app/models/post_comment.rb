@@ -6,7 +6,7 @@ class PostComment < ApplicationRecord
 
   after_create_commit :create_notifications
 
-  validates :comment, presence: true, length: {maximum: 400 }
+  validates :comment, presence: true, length: { minimum: 1, maximum: 400 }
 
   private
 
