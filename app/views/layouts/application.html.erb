@@ -20,14 +20,14 @@
         <ul class="navbar-nav ml-auto">
           <% if user_signed_in? %>
           <li class="nav-item ml-auto">
-            ようこそ、<%= current_user.name %>さん！
+            <h4 class="text-black mb-0">ようこそ、<%= current_user.name %>さん！</h4>
           </li>
           <% elsif admin_signed_in? %>
             管理者ログイン中
           <% else %>
           <% end %>
         </ul>
-
+       
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -38,10 +38,10 @@
   </header>
 
   <main>
-    <div class="text-success">
+    <div class="text-success flash-message-notice">
       <%= flash[:notice] %>
     </div>
-    <div class="text-danger">
+    <div class="text-danger flash-message-alert">
       <%= flash[:alert] %>
     </div>
     <%= yield %>

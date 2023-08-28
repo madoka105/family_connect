@@ -2,16 +2,16 @@
   <ul class="navbar-nav ml-auto">
     <% if user_signed_in? %>
       <li class="nav-item m-1">
-        <%= link_to "マイページ", users_mypage_path, class: "btn btn-outline-secondary btn-sm nav-btn" %>
+        <%= link_to "マイページ", users_mypage_path, class: "btn btn-outline-secondary btn-lg nav-btn" %>
       </li>
       <li class="nav-item m-1">
-        <%= link_to "投稿一覧", posts_path, class: "btn btn-outline-secondary btn-sm nav-btn" %>
+        <%= link_to "投稿一覧", posts_path, class: "btn btn-outline-secondary btn-lg nav-btn" %>
       </li>
       <li class="nav-item m-1">
-        <%= link_to "会員一覧", users_path, class: "btn btn-outline-secondary btn-sm nav-btn" %>
+        <%= link_to "会員一覧", users_path, class: "btn btn-outline-secondary btn-lg nav-btn" %>
       </li>
       <li class="nav-item m-1">
-        <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-outline-secondary btn-sm nav-btn" %>
+        <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-outline-secondary btn-lg nav-btn" %>
       </li>
     <% elsif admin_signed_in? %>
       <li class="nav-item m-1">
@@ -25,16 +25,16 @@
       </li>
     <% else %>
       <li class="nav-item m-1">
-        <%= link_to "About", about_path, class: "btn btn-outline-secondary btn-sm nav-btn" %>
+        <%= link_to "About", about_path, class: "btn btn-outline-secondary btn-lg nav-btn" %>
       </li>
       <li class="nav-item m-1">
-        <%= link_to "投稿一覧", posts_path, class: "btn btn-outline-secondary btn-sm nav-btn" %>
+        <%= link_to "投稿一覧", posts_path, class: "btn btn-outline-secondary btn-lg nav-btn" %>
       </li>
       <li class="nav-item m-1">
-        <%= link_to "新規登録", new_user_registration_path, class: "btn btn-outline-secondary btn-sm nav-btn" %>
+        <%= link_to "新規登録", new_user_registration_path, class: "btn btn-outline-secondary btn-lg nav-btn" %>
       </li>
       <li class="nav-item m-1">
-        <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-secondary btn-sm nav-btn" %>
+        <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-secondary btn-lg nav-btn" %>
       </li>
     <% end %>
   </ul>
@@ -50,11 +50,11 @@
     <% if user_signed_in? %> <!-- ログインしているかどうかの条件分岐 -->
       <%= link_to notifications_path, class: "nav-link" do %>
         <% if current_user.notifications.where(checked: false).exists? %>
-          <i class="fa-sharp fa-solid fa-bell fa-beat" style="color: #FF4F00;"></i>
+          <i class="fa-sharp fa-solid fa-bell fa-beat" style="font-size: 28px; color: #FF4F00;"></i>
         <% else %>
-          <i class="fa-sharp fa-solid fa-bell"></i>
+          <i class="fa-sharp fa-solid fa-bell" style="font-size: 18px;"></i>
         <% end %>
-        通知一覧
+        <span style="font-size: 18px;">通知一覧</span>
       <% end %>
     <% end %>
   </div>
