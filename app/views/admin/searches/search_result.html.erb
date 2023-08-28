@@ -1,33 +1,37 @@
 <!--会員一覧検索結果-->
   <!--検索対象モデルがUserの時 -->
 
-<h2 class="text-center my-3">会員の検索結果一覧</h2>
-<table class="table">
-  <thead class="justify-content-center" style="background-color:#F5F5F5;">
-    <tr>
-      <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">会員ID</th>
-      <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">氏名</th>
-      <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">メールアドレス</th>
-      <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">ステータス</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
-    <tr>
-      <td><%= user.id %></td>
-      <td><%= link_to (user.name), admin_user_path(user.id) %></td>
-      <td><%= user.email %></td>
-      <td><% if user.is_withdrawal %>
-            <span class="text-muted">退会済み</span>
-          <% else %>
-            <span class="text-success"><strong>有効</strong></span>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-
-</table>
-<div class="d-flex justify-content-center">
-  <%= paginate @searches %>
+<div class="container mt-4">
+  <h2 class="text-center my-3">会員の検索結果一覧</h2>
+  <div class="table-responsive">
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th class="col-3 col-md-2">会員ID</th>
+          <th class="col-3 col-md-2">氏名</th>
+          <th class="col-4 col-md-4">メールアドレス</th>
+          <th class="col-2 col-md-2">ステータス</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+        <tr>
+          <td class="col-3 col-md-2"><%= user.id %></td>
+          <td class="col-3 col-md-2"><%= link_to (user.name), admin_user_path(user.id) %></td>
+          <td class="col-4 col-md-4"><%= user.email %></td>
+          <td class="col-2 col-md-2">
+            <% if user.is_withdrawal %>
+              <span class="text-muted">退会済み</span>
+            <% else %>
+              <span class="text-success"><strong>有効</strong></span>
+            <% end %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="d-flex justify-content-center mt-3">
+    <%= paginate @searches %>
+  </div>
 </div>

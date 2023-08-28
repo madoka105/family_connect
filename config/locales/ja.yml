@@ -43,3 +43,17 @@ ja:
       over_x_years:
         one:   "1年以上"
         other: "%{count}年以上"
+
+
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              taken: "このメールアドレスは既に使用されています"
+              blank: "メールアドレスが入力されていません"
+            password:
+              blank: "パスワードが入力されていません"
+            name:
+              too_short: "名前が短すぎます"

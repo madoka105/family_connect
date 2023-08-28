@@ -1,8 +1,9 @@
 <!--ログインしているユーザーの右側に表示-->
 <!--フォローしている人を表示させる部分テンプレート-->
 
-<h1 class=text-center>友達一覧</h1>
-  <table class="table" style="background-color:#FFF4F9;">
+<h1 class="text-center my-3">友達一覧</h1>
+<div class="table-responsive">
+  <table class="table table-bordered" style="background-color:#FFF4F9;">
     <thead class="text-center">
       <tr>
         <th>写真</th>
@@ -17,7 +18,7 @@
         <% if current_user != user %>
         <td>
           <% if user.profile_image.attached? %>
-            <%= image_tag user.get_profile_image(100,100) %>
+            <%= image_tag user.get_profile_image(100,100), class: "rounded-circle" %>
           <% end %>
         </td>
         <td><%= user.name %></td>
@@ -30,3 +31,4 @@
       <% end %>
     </tbody>
   </table>
+</div>

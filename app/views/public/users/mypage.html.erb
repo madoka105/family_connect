@@ -1,10 +1,10 @@
 <!--ログインしているユーザーのマイページ-->
 <div class="container" >
   <div class="row my-3">
-    <div class="col-4">
+    <div class="col-md-4">
       <%= render partial: "info", locals: { user: @user }%>
     </div>
-    <div class="col-3 col-8">
+    <div class="col-md-8">
       <%= render 'friends', users: @users %>
     </div>
   </div>

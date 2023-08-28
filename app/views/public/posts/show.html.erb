@@ -5,11 +5,11 @@
     <title>投稿詳細画面</title>
 </head>
 <body>
-    <h2 class="text-center my-3">投稿詳細</h2>
-    <div class="container my-2">
+    <h2 class="text-center my-4">投稿詳細</h2>
+    <div class="container my-3">
         <div class="row" style="margin-top: 20px;">
             <div class="col-lg-9">
-                <table class="table table-bordered">
+                <table class="table table-bordered table-responsive-lg">
                     <thead>
                         <tr class="text-center" style="background-color:#F5F5F5;">
                             <th>投稿者</th>
@@ -27,7 +27,7 @@
                             <td><%= @post.text %></td>
                             <td>
                                 <% if @post.image.attached? %>
-                                    <%= image_tag @post.image, size: "350x250",style: "object-fit: cover;" %>
+                                    <%= image_tag @post.image, class: "img-fluid", style: "object-fit: cover;" %>
                                 <% else %>
                                     画像はありません
                                 <% end %>
@@ -35,18 +35,20 @@
                         </tr>
                     </tbody>
                 </table>
-                <% if current_user == @post.user %>
-                  <%= link_to "削除する", post_path(@post.id), method: :delete, class: "btn btn-danger" %>
-                <% end %>
+                <div class="col-lg-12 text-right my-3">
+                    <% if current_user == @post.user %>
+                      <%= link_to "削除する", post_path(@post.id), method: :delete, class: "btn btn-danger" %>
+                    <% end %>
+                </div>
 
-                <div class="col-lg-12 text-right">
+                <div class="col-lg-12 text-right my-3">
                     <%= form_with model: [@post, @post_comment] do |f| %>
                         <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %><br>
                         <%= f.submit "送信する" %>
                     <% end %>
                 </div>
             </div>
-            <div class="col-lg-3 overflow-auto" style="width: 300px; height: 500px;">
+            <div class="col-lg-3 overflow-auto" style="width: 300px; max-height: 500px;">
                 <p>コメント件数:<%= @post.post_comments.count %></p>
                 <% @post.post_comments.reverse_each do |post_comment| %>
                     <p>
