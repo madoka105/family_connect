@@ -13,8 +13,8 @@ class User < ApplicationRecord
   has_many :followeds, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
 
   # 一覧画面で使う
-  has_many :following_users, through: :followers, source: :followed
-  has_many :follower_users, through: :followeds, source: :follower
+  has_many :following_users, -> { where(is_withdrawal: false) }, through: :followers, source: :followed
+  has_many :follower_users, -> { where(is_withdrawal: false) }, through: :followeds, source: :follower
 
   # バリデーション（一意性を持たせ、かつ1～20文字の範囲で設定）
   validates :name, uniqueness: true,length: { minimum: 1, maximum: 20 }

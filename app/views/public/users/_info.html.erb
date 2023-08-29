@@ -44,14 +44,14 @@
   <div class="col-md-6 text-center">
     <div class="font-weight-bold">
       フォロー数：<%= link_to follows_user_path(user), class: "text-info" do %>
-        <%= user.followers.count %>
+        <%= user.following_users.count %>
       <% end %>
     </div>
   </div>
   <div class="col-md-6 text-center">
     <div class="font-weight-bold">
       フォロワー数：<%= link_to followers_user_path(user), class: "text-info" do %>
-        <%= user.followeds.count %>
+        <%= user.follower_users.count %>
       <% end %>
     </div>
   </div>

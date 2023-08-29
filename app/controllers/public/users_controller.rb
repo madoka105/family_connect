@@ -9,37 +9,33 @@ class Public::UsersController < ApplicationController
 
   # フォロー一覧
   def follows
-    @user = User.all.page(params[:page]).per(4)
     user = User.find(params[:id])
-    @users = user.following_users.where(is_withdrawal: false)
+    @users = user.following_users.page(params[:page]).per(4)
   end
 
   # フォロワー一覧
   def followers
-    @users = User.all.page(params[:page]).per(4)
     user = User.find(params[:id])
-    @user = user.follower_users.where(is_withdrawal: false)
+    @users = user.follower_users.page(params[:page]).per(4)
   end
 
   def index
-    @users = User.all
-    @user = User.all.page(params[:page]).per(4)
+    @users = User.all.page(params[:page]).per(4)
   end
 
   def show
     # where構文は、SQLと呼ばれるもので、
     # その条件に一致したものを取得します。
     @user = User.find(params[:id])
-    @users = @user.following_users.where(is_withdrawal: false)
-    @posts = @user.posts
-    @post = User.all.page(params[:page]).per(4)
+    @users = @user.following_users
+    @posts = @user.posts.page(params[:page]).per(4)
   end
 
   def mypage
     # where構文は、SQLと呼ばれるもので、
     # その条件に一致したものを取得します。
     @user = current_user
-    @users = @user.following_users.where(is_withdrawal: false)
+    @users = @user.following_users
   end
 
   def edit

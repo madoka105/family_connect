@@ -1,4 +1,5 @@
 class Public::ChatRoomsController < ApplicationController
+  before_action :authenticate_user!
   def show
     @partner = User.find(params[:id])
     
