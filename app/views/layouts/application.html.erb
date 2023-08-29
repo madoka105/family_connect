@@ -10,12 +10,13 @@
   <!-- fontawesomeがkitcodeで導入 -->
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= favicon_link_tag('favico.ico') %>
 </head>
 <body>
   <header class="shadow-sm">
     <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container">
-        <a class="navbar-brand p-1" href="/"><%= image_tag 'logo.png', :size => '250x125' %></a>
+        <a class="navbar-brand p-1" href="/"><%= image_tag asset_path('logo.png'), :size => '250x125' %></a>
 
         <ul class="navbar-nav ml-auto">
           <% if user_signed_in? %>
@@ -27,7 +28,7 @@
           <% else %>
           <% end %>
         </ul>
-       
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
