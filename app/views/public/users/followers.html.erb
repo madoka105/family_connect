@@ -1,34 +1,49 @@
-<h2 class="text-center my-3">Followers</h2>
-<table class='table'>
-  <thead class="justify-content-center" style="background-color:#F5F5F5;">
-    <tr>
-      <th>写真</th>
-      <th>名前</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @user.each do |user| %>
-      <tr>
-        <td>
-          <%= link_to user_path(user) do %>
-            <%= image_tag user.get_profile_image(100,100) %>
-          <% end %>
-        </td>
-        <td><%= user.name %></td>
-        <td>
-          <%= link_to follows_user_path(user) do %>
-            <p>フォロー<%= user.followers.count %></p>
-          <% end %>
-        </td>
-        <td>  
-          <%= link_to followers_user_path(user) do %>
-            <p>フォロワー<%= user.followeds.count %></p>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<div class="d-flex justify-content-center"><%= paginate(@users) %></div>
+<!--フォロワー一覧-->
+
+<div class="container">
+  <h2 class="text-center my-3">Followers</h2>
+  <div class="table-responsive">
+    <table class="table">
+      <thead class="text-center" style="background-color:#F5F5F5;">
+        <tr>
+          <th>写真</th>
+          <th>名前</th>
+          <th class="text-center">フォロー数</th>
+          <th class="text-center">フォロワー数</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td class="align-middle">
+              <%= link_to user_path(user) do %>
+                <%= image_tag user.get_profile_image(100, 100), class: "rounded-circle" %>
+              <% end %>
+            </td>
+            <td class="align-middle"><%= user.name %></td>
+            <td class="align-middle text-center">
+              <%= link_to follows_user_path(user), class: "text-info" do %>
+                <h6 class="font-weight-bold mb-0">フォロー：</h6><span><%= user.followers.count %></span>
+              <% end %>
+            </td>
+            <td class="align-middle text-center">
+              <%= link_to followers_user_path(user), class: "text-info" do %>
+                <h6 class="font-weight-bold mb-0">フォロワー：</h6>
+                <span><%= user.followeds.count %></span>
+              <% end %>
+            </td>
+            <td class="align-middle text-center">
+              <%= link_to user_path(user), class: "btn btn-info show-btn" do %>
+                Show
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="d-flex justify-content-center">
+    <%= paginate @users %>
+  </div>
+</div>

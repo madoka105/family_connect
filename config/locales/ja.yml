@@ -57,3 +57,7 @@ ja:
               blank: "パスワードが入力されていません"
             name:
               too_short: "名前が短すぎます"
+
+  time:
+    formats:
+      long: "%Y年%m月%d日 %H時%M分%S秒"

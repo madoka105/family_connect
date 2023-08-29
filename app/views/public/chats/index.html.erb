@@ -1,28 +1,40 @@
-<h2 class="text-center">ルーム一覧</h2>
-<table class="table table-striped">
-  <tbody>
-    <tr>
-      <td>
-        <!--名前からroomの詳細へ飛べるようにリンク化-->
-        <% if !@chat_partners.empty? %>
-        <div class="list-group">
-          <% @chat_partners.each do |chat_partner| %>
-            <div class="list-group-item">
-              <%= image_tag chat_partner.get_profile_image(60, 60) %>
-              <%= link_to "#{chat_partner.name}さんとのトークルーム","/chats/#{chat_partner.id}" %>
+<!--チャットの一覧画面-->
+
+<div class="text-center my-4">
+  <h2 class="mb-0">ルーム一覧</h2>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <tbody>
+      <tr>
+        <td>
+          <% if !@chat_partners.empty? %>
+            <div class="list-group">
+              <% @chat_partners.each do |chat_partner| %>
+                <div class="list-group-item d-flex align-items-center">
+                  <%= image_tag chat_partner.get_profile_image(80, 80), class: "mr-3 rounded-circle", alt: "#{chat_partner.name}さんのプロフィール画像" %>
+                  <div>
+                    <h5 class="mb-0">
+                      <%= link_to "#{chat_partner.name}さんとのトークルーム", "/chats/#{chat_partner.id}" %>
+                    </h5>
+                  </div>
+                </div>
+              <% end %>
             </div>
-            
-            <!--ユーザーのプロフィール画像を表示させたい-->
-            <%#=  has_one_attached_image_tag chats.partner_id, :user_image, format: 'jpeg', class: "round_image", fallback: "no_image.svg", size: "30x30" %>
+          <% else %>
+            <p class="text-center">トークルームはありません</p>
           <% end %>
-        <% end %>
-        </div>
-      </td>
-      <td>
-        <h6 style="color: #COCOCO;"><%#= chats.updated_at.strftime("%Y/%m/%d %H:%M") %></h6>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<%#= link_to("ログインページへ","/") %>
-<%#= link_to("ログアウトする","/users/sign_out",method: :delete )%>
+        </td>
+        <td class="align-middle">
+          <!-- レイアウトが整っている場合に更新日時を表示する -->
+          <!-- <h6 class="text-muted"><%#= chat.updated_at.strftime("%Y/%m/%d %H:%M") %></h6> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ログインページへのリンクやログアウトボタンのコードはコメントアウト -->
+<!-- <%= link_to("ログインページへ", "/") %> -->
+<!-- <%= link_to("ログアウトする", "/users/sign_out", method: :delete) %> -->
