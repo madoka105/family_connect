@@ -5,6 +5,7 @@ test:
   adapter: test
 
 production:
-  adapter: redis
-  url: "redis://54.248.86.119:6379"
-  channel_prefix: family_connect_production
+  adapter: async
+  # adapter: redis
+  # url: "redis://54.248.86.119:6379"
+  # channel_prefix: family_connect_production
