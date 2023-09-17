@@ -15,7 +15,7 @@
       <% if current_user != user %>
       <td>
         <% if user.profile_image.attached? %>
-          <%= image_tag user.get_profile_image(100,100) %>
+          <%= image_tag user.get_profile_image(100,100), class: "image-circle" %>
         <% end %>
       </td>
       <td><%= user.name %></td>

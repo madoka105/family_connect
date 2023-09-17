@@ -52,7 +52,7 @@
                 <p>コメント件数:<%= @post.post_comments.count %></p>
                 <% @post.post_comments.reverse_each do |post_comment| %>
                     <p>
-                        <%= image_tag post_comment.user.get_profile_image(100,100) %>
+                        <%= image_tag post_comment.user.get_profile_image(100,100), class: "image-circle" %>
                         <%= post_comment.user.name %><br>
                         <%= post_comment.created_at.strftime('%Y/%m/%d') %><br>
                         <%= post_comment.comment %><br>

@@ -18,7 +18,7 @@
         <% if current_user != user %>
         <td>
           <% if user.profile_image.attached? %>
-            <%= image_tag user.get_profile_image(100,100), class: "rounded-circle" %>
+            <%= image_tag user.get_profile_image(100,100), class: "image-circle" %>
           <% end %>
         </td>
         <td><%= user.name %></td>
@@ -31,4 +31,5 @@
       <% end %>
     </tbody>
   </table>
+  <div class="d-flex justify-content-center"><%= paginate(users) %></div>
 </div>

@@ -13,7 +13,7 @@
             <div class="list-group">
               <% @chat_partners.each do |chat_partner| %>
                 <div class="list-group-item d-flex align-items-center">
-                  <%= image_tag chat_partner.get_profile_image(80, 80), class: "mr-3 rounded-circle", alt: "#{chat_partner.name}さんのプロフィール画像" %>
+                  <%= image_tag chat_partner.get_profile_image(80, 80), class: "mr-3 image-circle2", alt: "#{chat_partner.name}さんのプロフィール画像" %>
                   <div>
                     <h5 class="mb-0">
                       <%= link_to "#{chat_partner.name}さんとのトークルーム", "/chats/#{chat_partner.id}" %>

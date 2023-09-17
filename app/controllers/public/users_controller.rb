@@ -20,7 +20,7 @@ class Public::UsersController < ApplicationController
   end
 
   def index
-    @users = User.all.page(params[:page]).per(4)
+    @users = User.where(is_withdrawal: false).page(params[:page]).per(4)
   end
 
   def show
@@ -35,7 +35,7 @@ class Public::UsersController < ApplicationController
     # where構文は、SQLと呼ばれるもので、
     # その条件に一致したものを取得します。
     @user = current_user
-    @users = @user.following_users
+    @users = @user.following_users.page(params[:page]).per(3)
   end
 
   def edit
