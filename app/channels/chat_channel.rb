@@ -26,7 +26,8 @@ class ChatChannel < ApplicationCable::Channel
       ChatChannel.broadcast_to data["partner_id"].to_i,
         sentence: data["sentence"],
         partner_id: data["partner_id"],
-        isCurrent_user: false
+        isCurrent_user: false,
+        send_user: data["current_user_id"].to_i
     end
   end
 end

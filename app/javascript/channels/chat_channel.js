@@ -18,7 +18,8 @@ if (!(location.pathname.includes('admin') || location.pathname == '/')) {
       let partner_image = `<img src="${$("#partner_image").attr('src')}">`;
       let my_name = $("#current_user_name").val();
       let partner_name = $("#partner_name").val();
-      console.log(data.sentence)
+      let partner_id = $("#partner_id").val();
+      // console.log(data,data.sentence)
       // 画面を開いているのがチャット送信者だった場合
       if (data["isCurrent_user"] == true) {
 
@@ -35,7 +36,7 @@ if (!(location.pathname.includes('admin') || location.pathname == '/')) {
         `;
       }
       // 画面を開いているのがチャット受信者だった場合
-      else {
+      else if (partner_id == data.send_user) {
         insertText = `
             <div class="fukidasi">
               <div class="text-left">
@@ -51,6 +52,8 @@ if (!(location.pathname.includes('admin') || location.pathname == '/')) {
               </div>
             </div>
         `;
+      } else {
+        return false;
       }
       $("#chats").append(insertText);
       // Called when there's incoming data on the websocket for this channel
@@ -64,6 +67,7 @@ if (!(location.pathname.includes('admin') || location.pathname == '/')) {
     speak(sentence) {
       const current_user_id = $("#current_user_id").val();
       const partner_id = $("#partner_id").val();
+      // console.log(sentence, "hoge2");
       return this.perform("speak", {
         sentence: sentence,
         current_user_id: current_user_id,
@@ -75,7 +79,7 @@ if (!(location.pathname.includes('admin') || location.pathname == '/')) {
   $(function () {
     $("#send").on("click", function (e) {
       const sentence = $("#sentence");
-      console.log(sentence)
+      // console.log(sentence, "hoge");
       appChat.speak(sentence.val());
       sentence.val(""); // フォームを空に
       e.preventDefault();
