@@ -1,31 +1,33 @@
 <!--会員一覧-->
 
-<h2 class="text-center my-3">会員一覧</h2>
-<table class="table">
-  <thead class="justify-content-center" style="background-color:#F5F5F5;">
-    <tr>
-      <th>写真</th>
-      <th>お名前</th>
-      <th colspan="4"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
-    <tr>
-      <% if current_user != user %>
-      <td>
-        <% if user.profile_image.attached? %>
-          <%= image_tag user.get_profile_image(100,100), class: "image-circle" %>
+<div class="container">
+  <h2 class="text-center my-3">会員一覧</h2>
+  <table class="table">
+    <thead class="justify-content-center" style="background-color:#F5F5F5;">
+      <tr>
+        <th>写真</th>
+        <th>お名前</th>
+        <th colspan="4"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+      <tr>
+        <% if current_user != user %>
+        <td>
+          <% if user.profile_image.attached? %>
+            <%= image_tag user.get_profile_image(100,100), class: "image-circle" %>
+          <% end %>
+        </td>
+        <td><%= user.name %></td>
+        <td>フォロー数: <%= user.followers.count %></td>
+        <td>フォロワー数: <%= user.followeds.count %></td>
+        <td><%= render "public/relationships/btn", user: user, options: { class: "follow-link" } %></td>
+        <td><%= link_to "Show", user %></td>
         <% end %>
-      </td>
-      <td><%= user.name %></td>
-      <td>フォロー数: <%= user.followers.count %></td>
-      <td>フォロワー数: <%= user.followeds.count %></td>
-      <td><%= render "public/relationships/btn", user: user, options: { class: "follow-link" } %></td>
-      <td><%= link_to "Show", user %></td>
+      </tr>
       <% end %>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
 <div class="d-flex justify-content-center"><%= paginate(@users) %></div>
+</div>

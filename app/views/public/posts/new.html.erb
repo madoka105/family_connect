@@ -40,8 +40,41 @@
         </div>
         <div class="text-center mb-3">
           <div class="col-12">
-            <%= f.submit '投稿', class: "btn btn-success bt-lg" %>
+            <%= f.submit '投稿', class: "btn btn-success btn-lg" %>
           </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row mt-5 mb-5 text-center">
+    <div class="col-12">
+      <h1>日記投稿</h1>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8">
+      <%= form_with model: @post, url: '/posts', local: true do |f| %>
+
+        <div class="form-group">
+          <%= f.label :title, class: "h4" %>
+          <%= f.text_field :title, class: "form-control", placeholder: "タイトルを入力してください" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :text, class: "h4" %>
+          <%= f.text_area :text, rows: 5, class: "form-control", placeholder: "日記を入力してください" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :image, class: "h4" %>
+          <%= f.file_field :image, accept: 'image/*', class: "form-control-file" %>
+        </div>
+
+        <div class="text-center mb-3">
+          <%= f.submit '投稿', class: "btn btn-success btn-lg" %>
         </div>
       <% end %>
     </div>
