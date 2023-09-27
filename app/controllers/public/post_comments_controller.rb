@@ -11,7 +11,7 @@ class Public::PostCommentsController < ApplicationController
       redirect_to post_path(post)
     else
       flash[:alert] = "コメントの投稿に失敗しました。"
-      request.referer
+      redirect_to request.referer
     end
   end
 

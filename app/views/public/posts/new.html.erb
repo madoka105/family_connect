@@ -5,72 +5,27 @@
       <h1>日記投稿</h1>
     </div>
   </div>
-  <div class="row">
-    <div class="col-12">
-      <%= form_with model: @post, url: '/posts', local: true do |f| %>
-
-        <div class="row justify-content-center mb-3">
-          <div class="col-4">
-            <h4 class="text-md-right">タイトル</h4>
-          </div>
-          <div class="col-md-8">
-            <%= f.text_field :title, size: "40", class: "form-control" %>
-          </div>
-        </div>
-
-        <div class="row justify-content-center mb-3">
-          <div class="col-4">
-            <h4 class="col text-md-right">日記</h4>
-          </div>
-          <div class="col-md-8">
-            <%= f.text_area :text, rows: 5, class: "form-control" %>
-          </div>
-        </div>
-
-        <div class="row justify-content-center mb-3">
-          <div class="col-12 col-md-4">
-            <h4 class="text-md-right">写真</h4>
-          </div>
-          <div class="col-12 col-md-8">
-            <%= f.file_field :image, accept: 'image/*', class: "form-control" %>
-          </div>
-        </div>
-        <div class="row justify-content-center mb-3">
-          <div class="col-sm-4" id="new-image"></div>
-        </div>
-        <div class="text-center mb-3">
-          <div class="col-12">
-            <%= f.submit '投稿', class: "btn btn-success btn-lg" %>
-          </div>
-        </div>
-      <% end %>
-    </div>
-  </div>
-</div>
-
-<div class="container">
-  <div class="row mt-5 mb-5 text-center">
-    <div class="col-12">
-      <h1>日記投稿</h1>
-    </div>
-  </div>
   <div class="row justify-content-center">
     <div class="col-12 col-md-8">
       <%= form_with model: @post, url: '/posts', local: true do |f| %>
 
         <div class="form-group">
-          <%= f.label :title, class: "h4" %>
+          <%= f.label :タイトル, class: "h4" %>
           <%= f.text_field :title, class: "form-control", placeholder: "タイトルを入力してください" %>
         </div>
 
         <div class="form-group">
-          <%= f.label :text, class: "h4" %>
+          <%= f.label :本文, class: "h4" %>
           <%= f.text_area :text, rows: 5, class: "form-control", placeholder: "日記を入力してください" %>
         </div>
 
         <div class="form-group">
-          <%= f.label :image, class: "h4" %>
-          <%= f.file_field :image, accept: 'image/*', class: "form-control-file" %>
+          <%= f.label :写真, class: "h4" %>
+          <%= f.file_field :image, accept: 'image/*', class: "form-control" %>
+        </div>
+
+        <div class="row justify-content-center mb-3">
+          <div class="col-sm-4" id="new-image"></div>
         </div>
 
         <div class="text-center mb-3">
