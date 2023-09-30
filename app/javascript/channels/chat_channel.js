@@ -59,7 +59,7 @@ if (!(location.pathname.includes('admin') || location.pathname == '/')) {
       // Called when there's incoming data on the websocket for this channel
       setTimeout(function(){
         var objDiv = document.getElementById("chat_container");
-　　　  objDiv.scrollTop = objDiv.scrollHeight;
+        objDiv.scrollTop = objDiv.scrollHeight;
       },200)
 
     },

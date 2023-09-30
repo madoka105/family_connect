@@ -12,7 +12,6 @@ import "jquery";
 import "popper.js";
 import "bootstrap";
 import "../stylesheets/application";
-import "../stylesheets/application.css";
 
 //= require jquery
  //= require jquery_ujs
@@ -27,5 +26,5 @@ require('./preview')
 
 $( window ).on("load", function() {
     var objDiv = document.getElementById("chat_container");
-　　objDiv.scrollTop = objDiv.scrollHeight;
+    objDiv.scrollTop = objDiv.scrollHeight;
 });

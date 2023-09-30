@@ -121,3 +121,88 @@
   font-size: 35px;
   background-color: #FFBFA3;
 }
+
+/* ページネーション自体のデザイン */
+.pagination > li > a {
+  border: none;
+  color: #696969;
+}
+
+/* 表示しているページ番号のデザイン */
+.pagination > .active > a {
+  background: #93c9ff;
+  border-radius: 15px;
+}
+
+/* ホバー時のデザイン */
+.pagination > li > a:hover {
+  border-radius: 15px;
+}
+
+header {
+  width: 100%;
+  height: 100%;
+  background-color: #E6F4F1;
+}
+
+main {
+  width: 100%;
+  height: 100%;
+  padding-bottom: 5%;
+  background-color: #FFF;
+}
+
+footer {
+  min-height: 50px;
+  background-color: #E6F4F1;
+}
+
+
+.original-btn {
+  background-color: #FFDF82;
+  border: 8px solid #FFDF82;
+  border-radius: 5px;
+  width: 100px;
+  font-weight: bold; /* ボタンのテキストの太さ */
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+}
+
+.hanareru-btn {
+  background-color: #49D698;
+  border: 8px solid #49D698;
+  border-radius: 5px;
+  width: 100px;
+  font-weight: bold; /* ボタンのテキストの太さ */
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+}
+
+.tunagaru-btn {
+  background-color: #FB9038;
+  border: 8px solid #FB9038;
+  border-radius: 5px;
+  width: 100px;
+  font-weight: bold; /* ボタンのテキストの太さ */
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+}
+
+.show-btn {
+  background-color: #F5B3C2;
+  border: 8px solid #F5B3C2;
+  border-radius: 5px;
+  width: 100px;
+  font-weight: bold; /* ボタンのテキストの太さ */
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+}
+
+.new-img {
+  width: 400px;
+  object-fit: cover;
+}

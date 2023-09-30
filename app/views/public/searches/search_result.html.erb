@@ -1,48 +1,37 @@
 <!--投稿一覧検索結果-->
   <!--検索対象モデルがPostの時 -->
 
-<h2 class="text-center my-3">投稿の検索結果一覧</h2>
-<table class="table">
-  <thead class="justify-content-center" style="background-color:#F5F5F5;">
-    <tr>
-      <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">お名前</th>
-      <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">投稿日</th>
-      <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">題名</th>
-      <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">写真</th>
-      <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">お気に入り</th>
-    </tr>
-  </thead>
-  <tbody>
+<div class="container">
+  <h2 class="text-center my-3">投稿の検索結果一覧</h2>
+  <div class="row">
     <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.user.name %></td>
-        <td>
-          <%= link_to post_path(post) do %>
-            <%= post.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
-          <% end %>
-        </td>
-        <td><%= post.title %></td>
-        <td>
+      <div class="col-md-6 mb-4">
+        <div class="card">
           <% if post.image.attached? %>
-            <%= image_tag post.image, size: "150x100", style: "object-fit: cover;" %>
+            <%= image_tag post.image, class: "card-img-top", style: "max-height: 200px; object-fit: cover;" %>
           <% else %>
-            画像はありません
+            <div class="card-img-top" style="background-color: #F5F5F5; height: 200px;"></div>
           <% end %>
-        </td>
-        <% if user_signed_in? %>
-          <td><%= render 'public/favorites/btn', post: post %></td>
-        <% else %>
-          <td>
-            <%= link_to post_favorites_path(post), method: :post do %>
-              <%= image_tag 'bookmark.png', :size => '70x70' %>
-              <%= post.favorites.count %> いいね
+          <div class="card-body">
+            <h5 class="card-title"><%= post.title %></h5>
+            <p class="card-text">
+              <strong>お名前:</strong> <%= post.user.name %><br>
+              <strong>投稿日:</strong> <%= post.created_at.strftime("%Y-%m-%d %H:%M:%S") %><br>
+            </p>
+            <% if user_signed_in? %>
+              <%= render 'public/favorites/btn', post: post %>
+            <% else %>
+              <%= link_to post_favorites_path(post), method: :post, class: "btn btn-info btn-sm" do %>
+                いいね <%= post.favorites.count %>
+              <% end %>
             <% end %>
-          </td>
-        <% end %>
-      </tr>
+            <%= link_to "詳細を見る", post_path(post), class: "btn btn-primary btn-sm ml-2" %>
+          </div>
+        </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
-<div class="d-flex justify-content-center">
-  <%= paginate @posts %>
+  </div>
+  <div class="d-flex justify-content-center">
+    <%= paginate @posts %>
+  </div>
 </div>
