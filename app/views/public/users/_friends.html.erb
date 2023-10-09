@@ -23,9 +23,9 @@
         </td>
         <td><%= user.name %></td>
         <td><%= user.birthday %></td>
-        <td><%= link_to '話す','/chats', { class: "original-btn" } %></td>
-        <td><%= render "public/relationships/btn", user: user, options: { class: "follow-link" } %></td>
-        <td><%= link_to "Show", user_path(user), { class: "show-btn" } %></td>
+        <td><%= link_to "話す","/chats", class: "original-btn" %></td>
+        <td><%= render "public/relationships/btn", user: user %></td>
+        <td><%= link_to "日記", user_path(user), class: "show-btn" %></td>
         <% end %>
       </tr>
       <% end %>
