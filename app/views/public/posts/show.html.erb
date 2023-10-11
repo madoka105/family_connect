@@ -1,98 +1,62 @@
 <!--投稿詳細画面-->
 
-<!--<!DOCTYPE html>-->
-<!--<html>-->
-<!--<head>-->
-<!--    <title>投稿詳細画面</title>-->
-     <!--ここにCSSリンクやスタイル情報を追加してください-->
-<!--    <style>-->
-        <!--/* ここにスタイル情報を追加してください */-->
-
-
-<!--        .box {-->
-            <!--/*max-width: 800px;*/-->
-<!--            margin: 10px auto;-->
-<!--            padding: 20px;-->
-<!--        }-->
-
-<!--        .post-details {-->
-<!--            display: flex;-->
-<!--            flex-wrap: wrap;-->
-<!--        }-->
-
-<!--        .post-details .custom-col-9,-->
-<!--        .post-details .custom-col-3 {-->
-<!--            padding: 10px;-->
-<!--        }-->
-
-<!--        .post-details .custom-col-9 {-->
-<!--            flex: 1;-->
-<!--        }-->
-
-<!--        .post-details .custom-col-3 {-->
-<!--            max-height: 500px;-->
-<!--            overflow: auto;-->
-<!--        }-->
-
-<!--        .post-details .post-content {-->
-<!--            border: 1px solid #F5F5F5;-->
-<!--            padding: 10px;-->
-<!--            background-color: #F5F5F5;-->
-<!--        }-->
-
-<!--        .post-details .comment {-->
-<!--            border: 1px solid #F5F5F5;-->
-<!--            margin-bottom: 10px;-->
-<!--            padding: 10px;-->
-<!--        }-->
-<!--    </style>-->
-<!--</head>-->
-<!--<body>-->
+<div class="container my-3">
     <h2 class="text-center my-4">投稿詳細</h2>
-    <div class="container my-3 box">
-        <div class="post-details">
-            <div class="col-lg-9 custom-col-9">
-                <div class="post-content">
-                    <p><strong>投稿者:</strong> <%= @post.user.name %></p>
-                    <p><strong>投稿日時:</strong> <%= @post.created_at.strftime('%Y/%m/%d') %></p>
-                    <p><strong>タイトル:</strong> <%= @post.title %></p>
-                    <p><strong>投稿内容:</strong> <%= @post.text %></p>
-                    <div class="post-image">
-                        <% if @post.image.attached? %>
-                            <%= image_tag @post.image, class: "img-fluid", style: "object-fit: cover;" %>
-                        <% else %>
-                            画像はありません
-                        <% end %>
-                    </div>
-                </div>
-                <div class="text-right my-3">
-                    <% if current_user == @post.user %>
-                        <%= link_to "削除する", post_path(@post.id), method: :delete, class: "btn btn-danger", data: { confirm: "本当に削除しますか？" } %>
-                    <% end %>
-                </div>
-                <div class="text-right my-3">
-                    <%= form_with model: [@post, @post_comment] do |f| %>
-                        <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %><br>
-                        <%= f.submit "送信する" %>
-                    <% end %>
-                </div>
+
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="mb-4">
+                <h4>投稿者: <%= @post.user.name %></h4>
+                <p>投稿日時: <%= @post.created_at.strftime('%Y/%m/%d') %></p>
+                <h4>タイトル: <%= @post.title %></h4>
+                <p>投稿内容: <%= @post.text %></p>
             </div>
-            <div class="col-lg-3 custom-col-3">
-                <p>コメント件数:<%= @post.post_comments.count %></p>
+
+            <% if @post.image.attached? %>
+                <div class="text-center">
+                    <%= image_tag @post.image, class: "img-fluid", style: "object-fit: cover;" %>
+                </div>
+            <% else %>
+                <p class="text-center">画像はありません</p>
+            <% end %>
+
+            <!-- 削除ボタン -->
+            <div class="text-right my-3">
+                <% if current_user == @post.user %>
+                    <%= link_to "削除する", post_path(@post.id), method: :delete, class: "btn btn-danger" %>
+                <% end %>
+            </div>
+
+            <!-- コメントフォーム -->
+            <div class="text-right my-3">
+                <%= form_with model: [@post, @post_comment] do |f| %>
+                    <div class="form-group">
+                        <%= f.text_area :comment, rows: '5', class: "form-control", placeholder: "コメントをここに" %><br>
+                    </div>
+                    <%= f.submit "送信する", class: "btn btn-primary btn-lg" %>
+                <% end %>
+            </div>
+        </div>
+
+        <!-- コメントセクション -->
+        <div class="col-lg-3">
+            <div style="max-height: 500px; overflow-y: auto;">
+                <p>コメント件数: <%= @post.post_comments.count %></p>
                 <% @post.post_comments.reverse_each do |post_comment| %>
-                    <div class="comment">
+                    <div class="border p-3 mb-3">
                         <%= image_tag post_comment.user.get_profile_image(100,100), class: "image-circle" %>
                         <p><%= post_comment.user.name %></p>
                         <p><%= post_comment.created_at.strftime('%Y/%m/%d') %></p>
                         <p><%= post_comment.comment %></p>
                         <p class="sentiment-score">本文の感情分析スコア<%= post_comment.score %></p>
+
+                        <!-- コメント削除ボタン -->
                         <% if current_user == post_comment.user %>
-                            <%= link_to "削除する", post_post_comment_path(post_id: @post.id, id: post_comment.id), method: :delete, class: "btn btn-danger", data: { confirm: "本当に削除しますか？" } %>
+                            <%= link_to "削除する", post_post_comment_path(post_id: @post.id, id: post_comment.id), method: :delete, class: "btn btn-danger" %>
                         <% end %>
                     </div>
                 <% end %>
             </div>
         </div>
     </div>
-<!--</body>-->
-<!--</html>-->
+</div>
