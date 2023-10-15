@@ -8,14 +8,22 @@
       <table>
         <thead class="thead-light">
           <tr>
+            <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">写真</th>
             <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">投稿日</th>
-            <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">日記</th>
+            <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">タイトル</th>
             <th class="col-xs-3 col-ms-3 col-md-2 col-lg-2">お気に入り</th>
           </tr>
         </thead>
         <tbody>
           <% posts.each do |post| %>
             <tr>
+              <td>
+                <% if post.image.attached? %>
+                    <%= image_tag post.image, size: "150x100",style: "object-fit: cover;" %>
+                <% else %>
+                    画像はありません
+                <% end %>
+              </td>
               <td>
                 <%= link_to post_path(post) do %>
                   <%= post.created_at.strftime("%Y年%m月%d日") %>

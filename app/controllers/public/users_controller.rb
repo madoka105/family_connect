@@ -28,7 +28,7 @@ class Public::UsersController < ApplicationController
     # その条件に一致したものを取得します。
     @user = User.find(params[:id])
     @users = @user.following_users.page(params[:page]).per(4)
-    @posts = @user.posts.page(params[:page]).per(4)
+    @posts = @user.posts.page(params[:page]).per(3)
   end
 
   def mypage
