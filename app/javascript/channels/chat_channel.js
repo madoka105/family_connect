@@ -3,16 +3,20 @@
 import consumer from "./consumer"
 
 if (!(location.pathname.includes('admin') || location.pathname == '/')) {
+  // ChatChannelを購読し、WebSocket接続を確立
   const appChat = consumer.subscriptions.create("ChatChannel", {
     connected() {
+      // サブスクリプションがサーバーで使用可能になったときに呼び出される
       //Called when the subscription is ready for use on the server
     },
 
     disconnected() {
+      // サブスクリプションがサーバーによって終了されたときに呼び出される
       // Called when the subscription has been terminated by the server
     },
 
     received(data) {
+       // WebSocketを介して受信したデータを処理
       let insertText = ""
       let my_image  = `<img src="${$("#user_image").attr('src')}">`;
       let partner_image = `<img src="${$("#partner_image").attr('src')}">`;
@@ -55,7 +59,9 @@ if (!(location.pathname.includes('admin') || location.pathname == '/')) {
       } else {
         return false;
       }
+      // チャットメッセージを表示
       $("#chats").append(insertText);
+      // チャットコンテナー内のスクロールを下に移動
       // Called when there's incoming data on the websocket for this channel
       setTimeout(function(){
         var objDiv = document.getElementById("chat_container");
@@ -65,6 +71,7 @@ if (!(location.pathname.includes('admin') || location.pathname == '/')) {
     },
 
     speak(sentence) {
+      // チャットメッセージを送信
       const current_user_id = $("#current_user_id").val();
       const partner_id = $("#partner_id").val();
       // console.log(sentence, "hoge2");
@@ -76,6 +83,7 @@ if (!(location.pathname.includes('admin') || location.pathname == '/')) {
     },
   });
 
+  // メッセージ送信ボタンのクリックイベントハンドラ
   $(function () {
     $("#send").on("click", function (e) {
       const sentence = $("#sentence");
