@@ -2,32 +2,33 @@
 
 <div class="container">
   <h2 class="text-center my-3">会員一覧</h2>
-  <table class="table">
-    <thead class="justify-content-center" style="background-color:#F5F5F5;">
-      <tr>
-        <th>写真</th>
-        <th>お名前</th>
-        <th colspan="4"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @users.each do |user| %>
-      <tr>
-        <% if current_user != user %>
-        <td>
+  <div class="table-responsive">
+    <table class="table">
+      <thead class="justify-content-center" style="background-color:#F5F5F5;">
+        <tr>
+          <th>写真</th>
+          <th>お名前</th>
+          <th>フォロー</th>
+          <th>日記一覧</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+        <tr>
+          <% if current_user != user %>
+          <td>
           <% if user.profile_image.attached? %>
             <%= image_tag user.get_profile_image(100,100), class: "image-circle" %>
           <% end %>
         </td>
-        <td><%= user.name %></td>
-        <td>フォロー数: <%= user.followers.count %></td>
-        <td>フォロワー数: <%= user.followeds.count %></td>
-        <td><%= render "public/relationships/btn", user: user%></td>
-        <td><%= link_to "日記一覧", user_path(user), class: "show-btn" %></td>
+          <td><%= user.name %></td>
+          <td><%= render "public/relationships/btn", user: user %></td>
+          <td><%= link_to "日記一覧", user_path(user), class: "show-btn" %></td>
+          <% end %>
+        </tr>
         <% end %>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-<div class="d-flex justify-content-center"><%= paginate(@users) %></div>
+      </tbody>
+    </table>
+  </div>
+  <div class="d-flex justify-content-center"><%= paginate(@users) %></div>
 </div>
