@@ -16,7 +16,7 @@
             <h5 class="card-title"><%= post.title %></h5>
             <p class="card-text">
               <strong>お名前:</strong> <%= post.user.name %><br>
-              <strong>投稿日:</strong> <%= post.created_at.strftime("%Y-%m-%d %H:%M:%S") %><br>
+              <strong>投稿日:</strong> <%= post.created_at.strftime("%Y-%m-%d") %><br>
             </p>
             <% if user_signed_in? %>
               <%= render 'public/favorites/btn', post: post %>
@@ -25,7 +25,7 @@
                 いいね <%= post.favorites.count %>
               <% end %>
             <% end %>
-            <%= link_to "詳細を見る", post_path(post), class: "btn btn-primary btn-sm ml-2" %>
+            <%= link_to "詳細を見る", post_path(post), class: "btn btn-primary btn-bg ml-2" %>
           </div>
         </div>
       </div>
